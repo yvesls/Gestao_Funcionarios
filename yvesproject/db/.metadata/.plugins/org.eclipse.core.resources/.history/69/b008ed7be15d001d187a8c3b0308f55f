@@ -1,0 +1,32 @@
+package com.mycompany.gestaofuncionarios.states;
+
+import com.mycompany.gestaofuncionarios.presenter.ManterFuncionarioPresenter;
+
+public class FuncionarioVisualizacaoStates extends FuncionarioStates {
+
+	public FuncionarioVisualizacaoStates(ManterFuncionarioPresenter funcManterPresenter) {
+		super(funcManterPresenter);
+		
+		funcManterPresenter.getViewManterFuncionario().getBtnSalvarModificacaoFuncionario().setVisible(false);
+		
+		funcManterPresenter.getViewManterFuncionario().getLblNome().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getLblCargo().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getLblIdade().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getLblAdmissao().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getLblSalario().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getLblDistanciaTrab().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getLblIdFunc().setVisible(true);
+		
+		
+	}
+
+	@Override
+	public void editar() {
+		this.funcManterPresenter.setFuncionarioState(new FuncionarioEditacaoState(this.funcManterPresenter));
+	}
+	
+	@Override
+	public void excluir() {
+		
+	}
+}

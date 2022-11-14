@@ -1,0 +1,51 @@
+package view;
+
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class ViewVerBonus {
+
+	private JFrame frame;
+	private JTable table;
+	private DefaultTableModel model;
+	private JButton btnFecharFuncionarios;
+
+	public ViewVerBonus() {
+		this.frame = new JFrame();
+		initialize();
+	}
+
+	private void initialize() {
+		frame.setBounds(100, 100, 636, 371);
+		frame.getContentPane().setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 24, 600, 273);
+		frame.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		model = new DefaultTableModel();
+		Object[] column = {"ID", "Nome", "Idade", "Função", "Admissão", "Salário Base (R$)"};
+		//Object[] row = new Object[0];
+		model.setColumnIdentifiers(column);
+		table.setModel(model);
+		scrollPane.setViewportView(table);
+		
+		btnFecharFuncionarios = new JButton("Fechar");
+		btnFecharFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnFecharFuncionarios.setBounds(10, 448, 50, 25);
+		frame.getContentPane().add(btnFecharFuncionarios);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	
+}

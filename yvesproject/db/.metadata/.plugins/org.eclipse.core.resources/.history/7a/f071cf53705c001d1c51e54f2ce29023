@@ -1,0 +1,83 @@
+package com.mycompany.gestaofuncionarios.DAO;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class ConexaoFactory {
+	private Connection conexao;
+	public boolean conectar() {
+		String url = "jdbc:sqlite:db/bdfuncionarios.db";
+		//System.out.println(url);
+		try {
+			setConexao(DriverManager.getConnection(url));
+			//System.out.println(getConexao());
+			System.out.println("Conectado com o banco de dados.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean fechar() {
+		try {
+			if(this.getConexao().isClosed() == false) {
+				System.out.println("Desconectado do banco de dados.");
+				this.getConexao().close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	} 
+	
+	public Statement criarStatement() {
+		try {
+			return this.getConexao().createStatement();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public PreparedStatement criarStatement(String pSQL, int RETURN_GENERATE_KEYS) {
+		try {
+			System.out.println("Executando.");
+			return this.getConexao().prepareStatement(pSQL, RETURN_GENERATE_KEYS);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public PreparedStatement criarStatement(String pSQL) {
+		try {
+			System.out.println("Executando.");
+			return this.getConexao().prepareStatement(pSQL);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Connection getConexao() {
+		return conexao;
+	}
+
+	public void setConexao(Connection conexao) {
+		this.conexao = conexao;
+	}
+	
+	
+}

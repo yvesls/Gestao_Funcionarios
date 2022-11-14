@@ -1,0 +1,23 @@
+package presenter;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import view.ViewVerBonus;
+
+public class VerBonusPresenter {
+	private ViewVerBonus viewVerBonus;
+
+	public VerBonusPresenter(ViewVerBonus viewVerBonus) {
+		this.viewVerBonus = viewVerBonus;
+		this.getAcoesDaView();
+	}
+
+	public void getAcoesDaView() {
+		this.view.getBtnFecharFuncionarios().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				view.getFrame().setVisible(false);
+			}
+		});
+	}
+}

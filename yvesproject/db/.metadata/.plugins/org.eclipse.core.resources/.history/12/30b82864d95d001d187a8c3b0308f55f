@@ -1,0 +1,17 @@
+package com.mycompany.gestaofuncionarios.states;
+
+import com.mycompany.gestaofuncionarios.model.Funcionario;
+import com.mycompany.gestaofuncionarios.presenter.FuncionarioPresenter;
+
+public abstract class FuncionarioStates {
+	private FuncionarioPresenter funcPresenter;
+	
+	public FuncionarioStates(FuncionarioPresenter funcPresenter, Funcionario func) {
+		this.funcPresenter= funcPresenter;
+	}
+	
+	public boolean statusState() {
+		
+		return false;
+	}
+}

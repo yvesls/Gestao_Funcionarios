@@ -1,0 +1,44 @@
+package model;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
+public class Bonus {
+	private Double valor;
+	private String data;
+	private String tipo;
+	private int idFunc;
+	
+	public Bonus(Double valor, String tipo, LocalDate data) {
+		this.valor = valor;
+		this.tipo = tipo;
+        Date date = Date.valueOf(data);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String dataCorrigida = format.format(date);
+        this.data = dataCorrigida;
+	}
+	
+	public Bonus(int idFunc, Double valor, String tipo, String data) {
+		this.valor = valor;
+		this.tipo = tipo;
+        this.data = data;
+        this.idFunc = idFunc;
+	}
+	
+	public Bonus() {
+		
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+}

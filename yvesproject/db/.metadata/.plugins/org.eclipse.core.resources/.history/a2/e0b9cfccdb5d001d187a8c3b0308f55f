@@ -1,0 +1,18 @@
+package com.mycompany.gestaofuncionarios.states;
+
+import com.mycompany.gestaofuncionarios.model.Funcionario;
+import com.mycompany.gestaofuncionarios.presenter.ManterFuncionarioPresenter;
+
+public class FuncionarioVisualizacaoStates extends FuncionarioStates {
+
+	public FuncionarioVisualizacaoStates(ManterFuncionarioPresenter funcManterPresenter, Funcionario func) {
+		super(funcManterPresenter, func);
+		
+	}
+
+	@Override
+	public boolean statusState() {
+		
+		return false;
+	}
+}

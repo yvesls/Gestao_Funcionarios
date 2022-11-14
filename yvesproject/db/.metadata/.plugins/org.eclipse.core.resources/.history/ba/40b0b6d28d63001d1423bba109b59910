@@ -1,0 +1,24 @@
+package states;
+
+import presenter.CalculadoraBonusPresenter;
+import presenter.ManterFuncionarioPresenter;
+
+public class CalculadoraBonusCalculoState extends CalculadoraBonusStates {
+	private CalculadoraBonusPresenter calculadoraBonus;
+	
+	public CalculadoraBonusCalculoState(CalculadoraBonusPresenter calculadoraBonus) {
+		super(calculadoraBonus);
+		this.calculadoraBonus = calculadoraBonus;
+		desabilitarVisualizacoesAnteriores();
+	}
+
+	@Override
+	public void visualizar() throws Exception {
+		this.calculadoraBonus.setCalculadoraState(new CalculadoraBonusVisualizacaoState(this.calculadoraBonus));
+	}
+
+	@Override
+	public void desabilitarVisualizacoesAnteriores() {
+		this.calculadoraBonus.getViewCalculadoraBonus().getTableSalariosCalculados().setVisible(false);
+	}
+}

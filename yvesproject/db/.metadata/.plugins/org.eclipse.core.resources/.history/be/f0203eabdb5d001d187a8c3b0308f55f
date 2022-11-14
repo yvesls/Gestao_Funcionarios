@@ -1,0 +1,23 @@
+package com.mycompany.gestaofuncionarios.states;
+
+import com.mycompany.gestaofuncionarios.presenter.ManterFuncionarioPresenter;
+
+public class FuncionarioStates {
+	private ManterFuncionarioPresenter funcPresenter;
+	
+	public FuncionarioStates(ManterFuncionarioPresenter funcPresenter) {
+		this.funcPresenter= funcPresenter;
+	}
+	
+	public void salvar() throw Exception {
+		throw new Exception ("Botão não pode ser acionado!");
+	}
+	
+	public void excluir() {
+		throw new Exception ("Botão não pode ser acionado!");
+	}
+	
+	public void visualizar() {
+		throw new Exception ("Botão não pode ser acionado!");
+	}
+}

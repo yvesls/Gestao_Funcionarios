@@ -1,0 +1,13 @@
+package com.mycompany.gestaofuncionarios.model;
+
+import java.time.LocalDate;
+
+public class BonusAssiduidade extends Bonus{
+
+	public BonusAssiduidade(String tipo, LocalDate data) {
+		super(tipo, data);
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+}

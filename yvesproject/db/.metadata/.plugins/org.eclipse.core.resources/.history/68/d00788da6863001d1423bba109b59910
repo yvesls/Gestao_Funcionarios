@@ -1,0 +1,10 @@
+package presenter;
+
+import view.ViewVerBonus;
+
+public class VerBonusPresenter {
+	private ViewVerBonus viewVerBonus;
+	public VerBonusPresenter(ViewVerBonus viewVerBonus) {
+		this.viewVerBonus = viewVerBonus;
+	}
+}

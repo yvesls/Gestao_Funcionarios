@@ -1,0 +1,30 @@
+package states;
+
+import presenter.CalculadoraBonusPresenter;
+import presenter.ManterFuncionarioPresenter;
+
+public class CalculadoraBonusCalculoState extends CalculadoraBonusStates {
+	private CalculadoraBonusPresenter calculadoraBonus;
+	
+	public CalculadoraBonusCalculoState(CalculadoraBonusPresenter calculadoraBonus) {
+		super(calculadoraBonus);
+		this.calculadoraBonus = calculadoraBonus;
+	}
+
+	@Override
+	public void visualizar() throws Exception {
+		this.calculadoraBonus.setCalculadoraState(new FuncionarioVisualizacaoStates(this.calculadoraBonus));
+	}
+
+	@Override
+	public void desabilitarVisualizacoesAnteriores() {
+		funcManterPresenter.getViewManterFuncionario().getBtnExcluirFuncionario().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getBtnEditarFuncionario().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblNome().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblCargo().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblIdade().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblSalario().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblDistanciaTrab().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblNumFaltas().setVisible(false);
+	}
+}

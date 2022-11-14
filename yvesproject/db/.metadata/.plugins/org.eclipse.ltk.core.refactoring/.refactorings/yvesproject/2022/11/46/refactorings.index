@@ -1,0 +1,16 @@
+1667740461747	Rename type 'IStatesFuncionario'
+1667740527740	Rename type 'FuncionarioEditarState'
+1667740694898	Copy package
+1667740708071	Delete element
+1667740731978	Rename type 'IFuncionarioStates'
+1667741284349	Rename package 'com.mycompany.gestaofuncionarios.presenter.states'
+1667952396562	Rename type 'Falta'
+1667953476571	Delete element
+1668211756617	Rename package 'com.mycompany.gestaofuncionarios.DAO'
+1668211799002	Rename package 'com.mycompany.gestaofuncionarios.view'
+1668211817751	Rename package 'com.mycompany.gestaofuncionarios.states'
+1668211840013	Rename package 'com.mycompany.gestaofuncionarios.presenter'
+1668211858869	Rename package 'com.mycompany.gestaofuncionarios.service'
+1668211869004	Rename package 'com.mycompany.gestaofuncionarios.model'
+1668211943269	Rename type 'CalculadoraBonus'
+1668211995998	Rename type 'CalculaBonus'

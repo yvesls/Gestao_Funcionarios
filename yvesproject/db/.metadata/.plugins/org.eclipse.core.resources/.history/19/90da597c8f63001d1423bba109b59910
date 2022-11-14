@@ -1,0 +1,59 @@
+package presenter;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+
+import states.CalculadoraBonusCalculoState;
+import states.CalculadoraBonusStates;
+import view.ViewCalculadoraBonus;
+
+public class CalculadoraBonusPresenter {
+	private ViewCalculadoraBonus view;
+	private CalculadoraBonusStates state;
+
+	public CalculadoraBonusPresenter(ViewCalculadoraBonus view) {
+		this.setCalculadoraBonusState(new CalculadoraBonusCalculoState(this));
+		this.getAcoesDaView();
+	}
+
+	public void getAcoesDaView() {
+		view.getBtnCalcular().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				visualizar();
+			}
+		});
+
+		viewManterFuncionario.getBtnSalvarModificacaoFuncionario().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (salvarFunc()) {
+
+						JOptionPane.showMessageDialog(null, "Modificação salva com sucesso!", "Atenção",
+								JOptionPane.INFORMATION_MESSAGE);
+						viewManterFuncionario.getFrame().setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(null, "Erro ao atualizar dados do funcionário!", "Erro",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public ViewCalculadoraBonus getViewCalculadoraBonus() {
+		return view;
+	}
+
+	public void setCalculadoraBonusState(CalculadoraBonusStates funcState) {
+		this.state = funcState;
+	}
+	
+	public void visualizar() {
+		state.visualizar();
+	}
+}

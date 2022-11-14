@@ -1,0 +1,26 @@
+package presenter;
+
+import states.CalculadoraBonusCalculoState;
+import states.CalculadoraBonusStates;
+import view.ViewCalculadoraBonus;
+
+public class CalculadoraBonusPresenter {
+	private ViewCalculadoraBonus view;
+	private CalculadoraBonusStates state;
+	
+	public CalculadoraBonusPresenter(ViewCalculadoraBonus view) {
+		this.setCalculadoraBonusState(new CalculadoraBonusCalculoState(this));
+	}
+	
+	public void getAcoesDaView() {
+	
+	}
+	
+	public ViewCalculadoraBonus getViewCalculadoraBonus() {
+		return view;
+	}
+	
+	public void setCalculadoraBonusState(CalculadoraBonusStates funcState) {
+		this.state = funcState;
+	}
+}

@@ -1,0 +1,8 @@
+package com.mycompany.gestaofuncionarios.model;
+
+import java.time.LocalDate;
+
+public class FaltaAoTrabalho {
+	private int quantidade;
+	private LocalDate mes;
+}
