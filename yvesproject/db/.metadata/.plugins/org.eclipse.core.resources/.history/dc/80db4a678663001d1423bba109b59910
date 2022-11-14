@@ -1,7 +1,0 @@
-package presenter;
-
-public class CalculadoraBonusPresenter {
-	public CalucladoraBonusPresenter(ViewCalculadoraBonus view) {
-		
-	}
-}
