@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import DAO.BonusSQLiteDAO;
+import DAO.DAOSQLiteFactory;
+import DAO.DAOSingleton;
 import DAO.FuncionarioSQLiteDAO;
 import DAO.SalarioSQLiteDAO;
 import model.Bonus;
@@ -77,23 +79,23 @@ public class CriarFuncionarioPresenter {
 	}
 
 	public boolean criarNovoFuncionario() throws Exception {
-		FuncionarioSQLiteDAO dao = new FuncionarioSQLiteDAO();
-		return dao.salvar(this.func);
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		return DAOSingleton.getInstance().getFuncionarioSqliteDAO().salvar(this.func);
 	}
 	
 	public Funcionario getFuncionarioCadastrado(String nome) {
-		FuncionarioSQLiteDAO dao = new FuncionarioSQLiteDAO();
-		this.func = dao.getFuncionario(nome).get(0);
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		this.func = DAOSingleton.getInstance().getFuncionarioSqliteDAO().getFuncionario(nome).get(0);
 		return this.func;
 	}
 
 	public boolean registrarSalarioFuncionario(Salario salario) {
-		SalarioSQLiteDAO daoSalario = new SalarioSQLiteDAO();
-		return daoSalario.salvar(salario, this.func);
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		return DAOSingleton.getInstance().getSalarioSqliteDAO().salvar(salario, this.func);
 	}
 
 	public boolean registrarBonusFuncionario(Bonus bonus) {
-		BonusSQLiteDAO daoBonus = new BonusSQLiteDAO();
-		return daoBonus.salvar(bonus);
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		return DAOSingleton.getInstance().getBonusSqliteDAO().salvar(bonus);
 	}
 }

@@ -1,0 +1,101 @@
+package view;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
+
+public class ViewCalculadoraBonus {
+	private JFrame frame;
+	private JTextField textDataDosFuncionarios;
+	private JButton btnCalcular;
+	private JButton btnListarTodos;
+	private JButton btnBuscar;
+	private JTable tableFuncionarios;
+	private JTable tableSalariosCalculados;
+	private DefaultTableModel model;
+	private DefaultTableModel model2;
+	private JButton btnFecharVerBonus;
+
+	public ViewCalculadoraBonus() {
+		frame = new JFrame();
+		initialize();
+	}
+
+	private void initialize() {
+		frame.setBounds(100, 100, 684, 459);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Data do cálculo:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(368, 387, 99, 21);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblDataCalculo = new JLabel("");
+		lblDataCalculo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDataCalculo.setBounds(477, 387, 82, 21);
+		frame.getContentPane().add(lblDataCalculo);
+		
+		textDataDosFuncionarios = new JTextField();
+		textDataDosFuncionarios.setBounds(12, 11, 104, 23);
+		frame.getContentPane().add(textDataDosFuncionarios);
+		textDataDosFuncionarios.setColumns(10);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBuscar.setBounds(126, 11, 89, 23);
+		frame.getContentPane().add(btnBuscar);
+		
+		btnListarTodos = new JButton("Listar todos");
+		btnListarTodos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnListarTodos.setBounds(505, 9, 153, 23);
+		frame.getContentPane().add(btnListarTodos);
+		
+		btnCalcular = new JButton("Calcular");
+		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCalcular.setBounds(569, 386, 89, 23);
+		frame.getContentPane().add(btnCalcular);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 41, 648, 335);
+		frame.getContentPane().add(scrollPane);
+		
+		tableFuncionarios = new JTable();
+		tableFuncionarios.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		model = new DefaultTableModel();
+		Object[] column = {"ID", "Nome", "Idade", "Função", "Admissão", "Salário Base (R$)"};
+		//Object[] row = new Object[0];
+		model.setColumnIdentifiers(column);
+		tableFuncionarios.setModel(model);
+		scrollPane.setViewportView(tableFuncionarios);
+		
+		JScrollPane scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(10, 41, 648, 335);
+		frame.getContentPane().add(scrollPane2);
+		
+		tableSalariosCalculados = new JTable();
+		tableSalariosCalculados.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		model2 = new DefaultTableModel();
+		Object[] column2 = {"Data do cálculo", "Cargo", "Tipo de bônus", "Valor do bônus"};
+		//Object[] row = new Object[0];
+		model2.setColumnIdentifiers(column2);
+		tableSalariosCalculados.setModel(model2);
+		scrollPane2.setViewportView(tableSalariosCalculados);
+		
+		btnFecharVerBonus = new JButton("Fechar");
+		btnFecharVerBonus.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnFecharVerBonus.setBounds(12, 386, 99, 23);
+		frame.getContentPane().add(btnFecharVerBonus);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	
+}

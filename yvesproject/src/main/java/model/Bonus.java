@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
+import bussiness.ConversorData;
+
 public class Bonus {
 	private Double valor;
 	private String data;
@@ -13,14 +15,16 @@ public class Bonus {
 		this.valor = 0.0;
 		this.tipo = "Sem bônus";
 		LocalDate date = LocalDate.now();
-		this.data = this.ConverterData(date);
+		ConversorData.instanciar();
+		this.data = ConversorData.converter(date);
 	}
 	
 	public Bonus(Double valor, String tipo) {
 		this.valor = valor;
 		this.tipo = tipo;
 		LocalDate date = LocalDate.now();
-		this.data = this.ConverterData(date);
+		ConversorData.instanciar();
+		this.data = ConversorData.converter(date);
 	}
 	
 	public Bonus(int idFunc, String tipo, String data, Double valor) {
@@ -54,22 +58,9 @@ public class Bonus {
 	public int getIdFunc() {
 		return idFunc;
 	}
-	
-	public String ConverterData(LocalDate date) {
-		String dataFormatada = "";
-		String[] split = date.toString().split("-");
-		for(int i = split.length-1; i>=0; i--) {
-			dataFormatada += split[i] + "/";
-		}
-		dataFormatada = dataFormatada.substring(0, dataFormatada.length()-1);
-		dataFormatada = dataFormatada.substring(3, dataFormatada.length());
-		return dataFormatada;
-	}
 
 	@Override
 	public String toString() {
 		return "Bonus [valor=" + valor + ", data=" + data + ", tipo=" + tipo + ", idFunc=" + idFunc + "]";
 	}
-	
-	
 }

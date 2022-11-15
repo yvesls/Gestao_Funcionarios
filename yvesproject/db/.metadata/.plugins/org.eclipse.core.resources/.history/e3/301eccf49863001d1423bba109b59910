@@ -1,0 +1,32 @@
+package states;
+
+import presenter.CalculadoraBonusPresenter;
+
+public class CalculadoraBonusCalculoState extends CalculadoraBonusStates {
+	private CalculadoraBonusPresenter calculadoraBonus;
+	
+	public CalculadoraBonusCalculoState(CalculadoraBonusPresenter calculadoraBonus) {
+		super(calculadoraBonus);
+		this.calculadoraBonus = calculadoraBonus;
+		desabilitarVisualizacoesAnteriores();
+		this.calculadoraBonus.getViewCalculadoraBonus().getTableFuncionarios().setVisible(true);
+		this.calculadoraBonus.getViewCalculadoraBonus().getBtnBuscar().setVisible(true);
+		this.calculadoraBonus.getViewCalculadoraBonus().getBtnListarTodos().setVisible(true);
+		this.calculadoraBonus.getViewCalculadoraBonus().getBtnCalcular().setVisible(true);
+		this.calculadoraBonus.getViewCalculadoraBonus().getTextDataDosFuncionarios().setVisible(true);
+		this.calculadoraBonus.getViewCalculadoraBonus().getLblDataCalculo().setVisible(true);
+		this.calculadoraBonus.getViewCalculadoraBonus().getLblMostraDataCalculo().setVisible(true);
+		this.calculadoraBonus.getViewCalculadoraBonus().getScrollPane().setVisible(true);
+	}
+
+	@Override
+	public void visualizar() throws Exception {
+		this.calculadoraBonus.setCalculadoraBonusState(new CalculadoraBonusVisualizacaoStates(this.calculadoraBonus));
+	}
+
+	@Override
+	public void desabilitarVisualizacoesAnteriores() {
+		this.calculadoraBonus.getViewCalculadoraBonus().getTableSalariosCalculados().setVisible(false);
+		this.calculadoraBonus.getViewCalculadoraBonus().getScrollPane2().setVisible(false);
+	}
+}

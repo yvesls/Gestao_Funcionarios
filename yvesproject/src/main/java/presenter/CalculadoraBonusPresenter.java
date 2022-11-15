@@ -5,13 +5,10 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-import DAO.BonusSQLiteDAO;
-import DAO.FuncionarioSQLiteDAO;
-import DAO.SalarioSQLiteDAO;
+import DAO.DAOSQLiteFactory;
+import DAO.DAOSingleton;
 import model.Bonus;
 import model.CalculoBonusDados;
 import model.Funcionario;
@@ -23,6 +20,7 @@ public class CalculadoraBonusPresenter {
 	private ViewCalculadoraBonus view;
 	private List<Salario> salarios;
 	private List<Funcionario> funcs;
+	private List<Bonus> bonus;
 	private String dataDaProcura;
 	private List<Double> valorBonus;
 	private List<CalculoBonusDados> objetoCalculoBonus;
@@ -37,23 +35,27 @@ public class CalculadoraBonusPresenter {
 		view.getBtnCalcular().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (objetoCalculoBonus != null) {
-					
-					for (int i = 0; i < salarios.size()-1; i++) {
-						try {
+					try {
+						for (int i = 0; i < salarios.size(); i++) {
+							funcs.get(i).setSalarioTotal(funcs.get(i).getSalario());
 							calculaBonus = new CalculadoraBonusService(funcs.get(i));
 							calculaBonus.calcular();
-						} catch (ParseException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
 						}
+						JOptionPane.showMessageDialog(null, "Salário calculado com sucesso!", "Atenção",
+								JOptionPane.INFORMATION_MESSAGE);
+					} catch (ParseException e1) {
+						JOptionPane.showMessageDialog(null, "Erro ao executar a operação!", "Erro",
+								JOptionPane.INFORMATION_MESSAGE);
+						e1.printStackTrace();
 					}
+					
 				}
 			}
 		});
 
 		view.getBtnBuscar().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (view.getTextDataDosFuncionarios().getText() != "") {
+				if (!view.getTextDataDosFuncionarios().getText().equals("")) {
 					dataDaProcura = view.getTextDataDosFuncionarios().getText();
 					view.getLblMostraDataCalculo().setText(dataDaProcura);
 					if (!carregarSalariosData(view.getTextDataDosFuncionarios().getText())) {
@@ -65,19 +67,25 @@ public class CalculadoraBonusPresenter {
 						gerarObjetoCalculoBonus();
 						gerarTabelaCalculoBonus();
 					}
+				}else {
+					JOptionPane.showMessageDialog(null, "É preciso inserir uma data.",
+							"Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 
 		view.getBtnListarTodos().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (!carregarTodosSalarios()) {
 
-			}
-		});
-
-		view.getBtnBuscar().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
+					JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum registro.",
+							"Erro", JOptionPane.ERROR_MESSAGE);
+				} else {
+					listarFuncionarios();
+					gerarObjetoCalculoBonus();
+					gerarTabelaCalculoBonus();
+				}
+				
 			}
 		});
 
@@ -91,10 +99,20 @@ public class CalculadoraBonusPresenter {
 	public ViewCalculadoraBonus getViewCalculadoraBonus() {
 		return view;
 	}
+	
+	public boolean carregarTodosSalarios() {
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		this.salarios = DAOSingleton.getInstance().getSalarioSqliteDAO().getTodosSalarios();
+		if (this.salarios != null) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean carregarSalariosData(String data) {
-		SalarioSQLiteDAO daoSalario = new SalarioSQLiteDAO();
-		this.salarios = daoSalario.getTodosSalariosMes(data);
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		
+		this.salarios = DAOSingleton.getInstance().getSalarioSqliteDAO().getTodosSalariosMes(data);
 		if (this.salarios != null) {
 			return true;
 		}
@@ -102,8 +120,8 @@ public class CalculadoraBonusPresenter {
 	}
 
 	public Funcionario carregarFuncionariosPorId(int idFunc) {
-		FuncionarioSQLiteDAO dao = new FuncionarioSQLiteDAO();
-		return dao.getFuncionariosPorId(idFunc);
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		return DAOSingleton.getInstance().getFuncionarioSqliteDAO().getFuncionariosPorId(idFunc);
 	}
 
 	public void listarFuncionarios() {
@@ -117,8 +135,9 @@ public class CalculadoraBonusPresenter {
 
 	public Double carregarBonusPorDataIdFunc(String data, int idFunc) {
 		Double valor = 0.0;
-		BonusSQLiteDAO dao = new BonusSQLiteDAO();
-		for (Bonus bonus : dao.getListTodosBonusFuncMesId(data, idFunc)) {
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		this.bonus = DAOSingleton.getInstance().getBonusSqliteDAO().getListTodosBonusFuncMesId(data, idFunc);
+		for (Bonus bonus : this.bonus) {
 			valor += bonus.getValor();
 		}
 		return valor;

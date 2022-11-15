@@ -1,0 +1,11 @@
+package model;
+
+public class CalculaBonusPorDistancia implements ICalculaBonus {
+
+	@Override
+	public void calcular(Funcionario func) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

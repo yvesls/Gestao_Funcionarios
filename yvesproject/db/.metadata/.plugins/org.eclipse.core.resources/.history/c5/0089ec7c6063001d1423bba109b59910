@@ -1,0 +1,30 @@
+package view;
+
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+public class ViewVerBonus {
+
+	private JFrame frame;
+
+	/**
+	 * Create the application.
+	 */
+	public ViewVerBonus() {
+		this.frame = new JFrame();
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame.setBounds(100, 100, 636, 270);
+		frame.getContentPane().setLayout(null);
+		
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+}

@@ -1,0 +1,10 @@
+package presenter;
+
+import view.ViewCalculadoraBonus;
+
+public class CalculadoraBonusPresenter {
+	
+	public CalculadoraBonusPresenter(ViewCalculadoraBonus view) {
+		
+	}
+}

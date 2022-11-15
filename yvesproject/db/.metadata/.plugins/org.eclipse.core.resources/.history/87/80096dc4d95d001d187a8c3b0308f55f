@@ -1,0 +1,19 @@
+package com.mycompany.gestaofuncionarios.states;
+
+import com.mycompany.gestaofuncionarios.model.Funcionario;
+import com.mycompany.gestaofuncionarios.presenter.FuncionarioPresenter;
+
+public class FuncionarioEditacaoState extends FuncionarioStates {
+
+	public FuncionarioEditacaoState(ManterFuncionarioPresenter funcPresenter, Funcionario func) {
+		super(funcPresenter, func);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean statusState() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

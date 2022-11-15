@@ -1,0 +1,9 @@
+package DAO;
+
+import com.mycompany.gestaofuncionarios.model.Funcionario;
+
+public interface IFuncionarioDAO {
+	public boolean salvar(Funcionario func);
+	public void remover();
+	public boolean atualizar();
+}

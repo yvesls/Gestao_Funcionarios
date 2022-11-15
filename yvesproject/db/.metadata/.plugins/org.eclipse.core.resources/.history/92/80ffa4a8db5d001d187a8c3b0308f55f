@@ -1,0 +1,23 @@
+package com.mycompany.gestaofuncionarios.states;
+
+import com.mycompany.gestaofuncionarios.presenter.ManterFuncionarioPresenter;
+
+public class FuncionarioStates {
+	private ManterFuncionarioPresenter funcPresenter;
+	
+	public FuncionarioStates(ManterFuncionarioPresenter funcPresenter) {
+		this.funcPresenter= funcPresenter;
+	}
+	
+	public void salvar() {
+		
+	}
+	
+	public void excluir() {
+			
+	}
+	
+	public void visualizar() {
+		
+	}
+}

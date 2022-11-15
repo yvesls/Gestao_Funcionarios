@@ -1,0 +1,57 @@
+package view;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+public class ViewCalculadoraBonus {
+	private JFrame frame;
+	private JTextField textDataDosFuncionarios;
+	private JButton btnCalcular;
+
+	public ViewCalculadoraBonus() {
+		frame = new JFrame();
+		initialize();
+	}
+
+	private void initialize() {
+		frame.setBounds(100, 100, 636, 371);
+		frame.getContentPane().setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Data do cálculo:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(348, 300, 99, 21);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblDataCalculo = new JLabel("");
+		lblDataCalculo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDataCalculo.setBounds(457, 300, 54, 21);
+		frame.getContentPane().add(lblDataCalculo);
+		
+		textDataDosFuncionarios = new JTextField();
+		textDataDosFuncionarios.setBounds(12, 11, 104, 23);
+		frame.getContentPane().add(textDataDosFuncionarios);
+		textDataDosFuncionarios.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBuscar.setBounds(126, 11, 89, 23);
+		frame.getContentPane().add(btnBuscar);
+		
+		JButton btnListarTodos = new JButton("Listar todos");
+		btnListarTodos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnListarTodos.setBounds(457, 10, 153, 23);
+		frame.getContentPane().add(btnListarTodos);
+		
+		btnCalcular = new JButton("Calcular");
+		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCalcular.setBounds(521, 298, 89, 23);
+		frame.getContentPane().add(btnCalcular);
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+}

@@ -1,0 +1,26 @@
+package service;
+
+import model.Bonus;
+import model.Funcionario;
+import model.ICalculaBonus;
+
+public class CalculadoraBonusService {
+	private Funcionario func;
+	private ICalculaBonus metodoCalculo;
+	
+	public CalculadoraBonusService(){
+		
+	}
+	
+	public void addFuncionario(Funcionario func) {
+		this.func = func;
+	}
+	
+	public void addBonus(ICalculaBonus bonus) {
+		this.metodoCalculo = bonus;
+	}
+	
+	public void calcular() {
+		
+	}
+}

@@ -1,0 +1,36 @@
+package com.mycompany.gestaofuncionarios.states;
+
+import com.mycompany.gestaofuncionarios.presenter.ManterFuncionarioPresenter;
+
+public class FuncionarioEditacaoState extends FuncionarioStates {
+
+	public FuncionarioEditacaoState(ManterFuncionarioPresenter funcPresenter) {
+		super(funcPresenter);
+		
+		funcManterPresenter.getViewManterFuncionario().getBtnExcluirFuncionario().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getBtnEditarFuncionario().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblNome().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblCargo().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblIdade().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblSalario().setVisible(false);
+		funcManterPresenter.getViewManterFuncionario().getLblDistanciaTrab().setVisible(false);
+		
+		funcManterPresenter.getViewManterFuncionario().getBtnSalvarModificacaoFuncionario().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getTextNome().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getTextCargo().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getTextIdade().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getTextSalario().setVisible(true);
+		funcManterPresenter.getViewManterFuncionario().getTextDistTrab().setVisible(true);
+		
+		funcManterPresenter.getViewManterFuncionario().getTextNome().setText(funcManterPresenter.getFunc().getNome());
+		funcManterPresenter.getViewManterFuncionario().getTextCargo().setText(funcManterPresenter.getFunc().getCargo());
+		funcManterPresenter.getViewManterFuncionario().getTextIdade().setText(String.valueOf(funcManterPresenter.getFunc().getIdade()));
+		funcManterPresenter.getViewManterFuncionario().getTextSalario().setText(String.valueOffuncManterPresenter.getFunc().getSalario()));
+		funcManterPresenter.getViewManterFuncionario().getTextDistTrab().setText(funcManterPresenter.getFunc().getNome());
+	}
+
+	@Override
+	public void salvar() {
+		this.funcManterPresenter.setFuncionarioState(new FuncionarioVisualizacaoStates(this.funcManterPresenter));
+	}
+}

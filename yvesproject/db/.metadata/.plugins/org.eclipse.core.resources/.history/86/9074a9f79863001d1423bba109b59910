@@ -1,0 +1,24 @@
+package states;
+
+import presenter.CalculadoraBonusPresenter;
+
+public class CalculadoraBonusStates {
+	protected CalculadoraBonusPresenter calculadoraBonus;
+
+	public CalculadoraBonusStates(CalculadoraBonusPresenter calculadoraBonus) {
+		this.calculadoraBonus = calculadoraBonus;
+	}
+
+	public void calcular() throws Exception {
+		throw new Exception("Botão não pode ser acionado!");
+	}
+
+	public void visualizar() throws Exception {
+		throw new Exception("Botão não pode ser acionado!");
+	}
+
+	public void desabilitarVisualizacoesAnteriores() {
+		// TODO Auto-generated method stub
+		
+	}
+}

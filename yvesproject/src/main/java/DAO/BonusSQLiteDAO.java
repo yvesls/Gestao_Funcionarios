@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Bonus;
-import model.Funcionario;
 
-public class BonusSQLiteDAO extends ConexaoFactory {
+public class BonusSQLiteDAO extends DAOSQLiteConexao {
 
 	public boolean salvar(Bonus bonus) {
 		PreparedStatement stmt = null;
@@ -91,14 +90,14 @@ public class BonusSQLiteDAO extends ConexaoFactory {
 		Bonus bonus = new Bonus();
 		ResultSet result = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT id_funcionario, valor_bonus FROM tb_bonus WHERE data_bonus = '" + data
+		String sql = "SELECT id_funcionario, valor_bonus, tipo_bonus, data_bonus FROM tb_bonus WHERE data_bonus = '" + data
 				+ "' AND id_funcionario ='" + idFunc + "';";
 
 		stmt = this.criarStatement(sql);
 		try {
 			result = stmt.executeQuery();
 			while (result.next()) {
-				bonus = new Bonus(result.getInt("id_funcionario"), result.getDouble("valor_bonus"));
+				bonus = new Bonus(result.getInt("id_funcionario"), result.getString("tipo_bonus"), result.getString("data_bonus"), result.getDouble("valor_bonus"));
 				listaBonus.add(bonus);
 			}
 			fechar();
@@ -117,37 +116,19 @@ public class BonusSQLiteDAO extends ConexaoFactory {
 		}
 		return listaBonus;
 	}
-
+	
 	public Bonus getListBonusFuncMesIdTipo(String data, int idFunc, String tipo) {
-		conectar();
-		Bonus bonus = null;
-		ResultSet result = null;
-		PreparedStatement stmt = null;
-		String sql = "SELECT id_funcionario, valor_bonus FROM tb_bonus WHERE data_bonus = '" + data
-				+ "' AND id_funcionario ='" + idFunc + "' AND tipo_bonus = '" + tipo + "';";
-
-		stmt = this.criarStatement(sql);
 		try {
-			result = stmt.executeQuery();
-			if(result != null) {
-				bonus = new Bonus(result.getInt("id_funcionario"), result.getDouble("valor_bonus"));
-			}
-			fechar();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					Logger.getLogger(BonusSQLiteDAO.class.getName(), null).log(Level.SEVERE, null, e);
+			for (Bonus bonus : getListTodosBonusFuncMesId(data, idFunc)) {
+				if (bonus.getTipo().equals(tipo)) {
+					return bonus;
 				}
 			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		return bonus;
+		return null;
 	}
 
 	public void ifIsCriarTb() {

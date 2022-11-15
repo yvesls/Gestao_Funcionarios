@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 
+import DAO.DAOSQLiteFactory;
+import DAO.DAOSingleton;
 import DAO.FaltasSQLiteDAO;
 import DAO.FuncionarioSQLiteDAO;
 import DAO.SalarioSQLiteDAO;
@@ -41,7 +43,6 @@ public class ManterFuncionarioPresenter {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (salvarFunc()) {
-
 						JOptionPane.showMessageDialog(null, "Modificação salva com sucesso!", "Atenção",
 								JOptionPane.INFORMATION_MESSAGE);
 						viewManterFuncionario.getFrame().setVisible(false);
@@ -102,7 +103,7 @@ public class ManterFuncionarioPresenter {
 		FaltasSQLiteDAO daoFalta = new FaltasSQLiteDAO();
 		return daoFalta.deletarFaltasFunc(this.func.getFuncId());
 	}
-	
+
 	public boolean excluirSalariosFunc() {
 		SalarioSQLiteDAO daoSalario = new SalarioSQLiteDAO();
 		return daoSalario.excluir(this.func.getFuncId());
@@ -139,9 +140,12 @@ public class ManterFuncionarioPresenter {
 						getViewManterFuncionario().getTextNome().getText(),
 						getViewManterFuncionario().getTextCargo().getText(),
 						Integer.valueOf(getViewManterFuncionario().getTextIdade().getText()),
+						0.0,
 						Double.valueOf(getViewManterFuncionario().getTextSalario().getText()),
 						Integer.valueOf(getViewManterFuncionario().getTextDistTrab().getText()),
-						getViewManterFuncionario().getLblAdmissao().getText(), 0.0);
+						String.valueOf(getViewManterFuncionario().getLblAdmissao().getText()),
+						getViewManterFuncionario().getChckbxFuncMes().isEnabled(),
+						Double.valueOf(getViewManterFuncionario().getTextTempoServico().getText()));
 			} catch (NumberFormatException e1) {
 				e1.printStackTrace();
 				JOptionPane.showConfirmDialog(null, "Digite valores válidos!");
@@ -180,13 +184,15 @@ public class ManterFuncionarioPresenter {
 
 	public int carregarFaltaFuncionarioSelecionado(Funcionario func) throws Exception {
 		LocalDate data = LocalDate.now();
-		FaltaAoTrabalho falta = new FaltasSQLiteDAO().getFaltasFuncionarioEsseMes(func.getFuncId(), data);
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		
+		FaltaAoTrabalho falta = DAOSingleton.getInstance().getFaltaSqliteDAO().getFaltasFuncionarioEsseMes(func.getFuncId(), data);
 		if (falta != null) {
 			qtdFalta = falta.getQuantidadeFaltas();
 		} else {
 			func.addFalta(new FaltaAoTrabalho());
-			new FaltasSQLiteDAO().salvar(func.getFaltaTrabalho(), func.getFuncId());
-			falta = new FaltasSQLiteDAO().getFaltasFuncionarioEsseMes(func.getFuncId(), data);
+			DAOSingleton.getInstance().getFaltaSqliteDAO().salvar(func.getFaltaTrabalho(), func.getFuncId());
+			falta = DAOSingleton.getInstance().getFaltaSqliteDAO().getFaltasFuncionarioEsseMes(func.getFuncId(), data);
 			qtdFalta = falta.getQuantidadeFaltas();
 		}
 		return qtdFalta;

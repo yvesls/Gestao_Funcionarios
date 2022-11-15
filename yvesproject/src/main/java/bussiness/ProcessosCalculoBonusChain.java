@@ -2,10 +2,6 @@ package bussiness;
 
 import java.text.ParseException;
 
-import model.CalculaBonusAbstract;
-import model.CalculoBonusDados;
-import model.Funcionario;
-
 public class ProcessosCalculoBonusChain {
 	private CalculaBonusAbstract metodo;
 	private ProcessosCalculoBonusChain next;
@@ -23,16 +19,9 @@ public class ProcessosCalculoBonusChain {
 		this.next = next;
 	}
 
-	public void execute() {
-		try {
-			System.out.println(String.format("Calculando por:" + metodo.toString()));
-			metodo.calcular();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void execute() throws ParseException {
+		metodo.calcular();
 		
-
 		if (metodo == null)
 			return;
 		if (next != null)

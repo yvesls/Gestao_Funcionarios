@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import model.Funcionario;
 import model.Salario;
 
-public class SalarioSQLiteDAO extends ConexaoFactory {
+public class SalarioSQLiteDAO extends DAOSQLiteConexao {
 
 	public boolean salvar(Salario salario, Funcionario func) {
 		PreparedStatement stmt = null;
@@ -131,6 +131,44 @@ public class SalarioSQLiteDAO extends ConexaoFactory {
 			}
 		}
 		return true;
+	}
+	
+	public List<Salario> getTodosSalarios() {
+		conectar();
+		List<Salario> listaSal = new ArrayList<>();
+		ResultSet result = null;
+		PreparedStatement stmt = null;
+		Salario sal = new Salario();
+
+		String sql = "SELECT id_funcionario, salario, salario_total, data_salario "
+				+ "FROM tb_salario;";
+		stmt = this.criarStatement(sql);
+
+		try {
+			stmt.executeQuery();
+			result = stmt.executeQuery();
+			while (result.next()) {
+				sal = new Salario(result.getInt("id_funcionario"), result.getDouble("salario"),
+						result.getDouble("salario_total"), result.getString("data_salario"));
+
+				listaSal.add(sal);
+			}
+			fechar();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Logger.getLogger(SalarioSQLiteDAO.class.getName(), null).log(Level.SEVERE, null, e);
+			return null;
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					Logger.getLogger(SalarioSQLiteDAO.class.getName(), null).log(Level.SEVERE, null, e);
+				}
+			}
+		}
+		return listaSal;
 	}
 
 	public List<Salario> getTodosSalariosMes(String data) {

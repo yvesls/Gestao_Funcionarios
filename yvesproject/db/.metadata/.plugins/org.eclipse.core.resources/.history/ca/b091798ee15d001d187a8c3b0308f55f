@@ -1,0 +1,17 @@
+package com.mycompany.gestaofuncionarios.states;
+
+import com.mycompany.gestaofuncionarios.presenter.ManterFuncionarioPresenter;
+
+public class FuncionarioEditacaoState extends FuncionarioStates {
+
+	public FuncionarioEditacaoState(ManterFuncionarioPresenter funcPresenter) {
+		super(funcPresenter);
+		
+		
+	}
+
+	@Override
+	public void salvar() {
+		this.funcManterPresenter.setFuncionarioState(new FuncionarioVisualizacaoStates(this.funcManterPresenter));
+	}
+}

@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
+import bussiness.ConversorData;
+
 public class Salario {
 	private int idFunc;
 	private Double salario;
@@ -19,7 +21,8 @@ public class Salario {
 		this.salario = salario;
 		this.salarioTotal = salarioTotal;
 		LocalDate data = LocalDate.now();
-		this.data = this.ConverterData(data);
+		ConversorData.instanciar();
+		this.data = ConversorData.converter(data);
 	}
 	
 	public Salario() {
@@ -40,16 +43,5 @@ public class Salario {
 
 	public String getData() {
 		return data;
-	}
-	
-	public String ConverterData(LocalDate date) {
-		String dataFormatada = "";
-		String[] split = date.toString().split("-");
-		for(int i = split.length-1; i>=0; i--) {
-			dataFormatada += split[i] + "/";
-		}
-		dataFormatada = dataFormatada.substring(0, dataFormatada.length()-1);
-		dataFormatada = dataFormatada.substring(3, dataFormatada.length());
-		return dataFormatada;
 	}
 }

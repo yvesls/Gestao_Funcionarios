@@ -65,7 +65,7 @@ public class Funcionario {
 	    this.admissao = admissao;
 	    this.funcMes = funcionarioMes;
 	    this.tempoServico = tempoServico;
-	    if(salarioTotal == null) {
+	    if(salarioTotal == null || salarioTotal == 0) {
 	    	this.salarioTotal = this.salario;
 	    }else {
 	    	this.salarioTotal = salarioTotal;
@@ -135,19 +135,66 @@ public class Funcionario {
 	}
 
 
-
-	@Override
-	public String toString() {
-		return "Funcionario [nome=" + nome + ", cargo=" + cargo + ", admissao=" + admissao + ", idade=" + idade
-				+ ", salario=" + salario + ", distTrab=" + distTrab + ", FuncId=" + FuncId + ", salarioTotal="
-				+ salarioTotal + ", funcMes=" + funcMes + ", tempoServico=" + tempoServico + "]";
-	}
-
 	public boolean isFuncMes() {
 		return funcMes;
 	}
 
 	public Double getTempoServico() {
 		return tempoServico;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	public void setAdmissao(String admissao) {
+		this.admissao = admissao;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public void setSalario(Double salario) {
+		this.salario = salario;
+	}
+
+	public void setDistTrab(int distTrab) {
+		this.distTrab = distTrab;
+	}
+
+	public void setFuncId(int funcId) {
+		FuncId = funcId;
+	}
+
+	public void setSalarioTotal(Double salarioTotal) {
+		this.salarioTotal = salarioTotal;
+	}
+
+	public void setBonusRecebidos(List<Bonus> bonusRecebidos) {
+		this.bonusRecebidos = bonusRecebidos;
+	}
+
+	public void setFaltaTrabalho(FaltaAoTrabalho faltaTrabalho) {
+		this.faltaTrabalho = faltaTrabalho;
+	}
+
+	public void setFuncMes(boolean funcMes) {
+		this.funcMes = funcMes;
+	}
+
+	public void setTempoServico(Double tempoServico) {
+		this.tempoServico = tempoServico;
+	}
+
+	@Override
+	public String toString() {
+		return "Funcionario [nome=" + nome + ", cargo=" + cargo + ", admissao=" + admissao + ", idade=" + idade
+				+ ", salario=" + salario + ", distTrab=" + distTrab + ", FuncId=" + FuncId + ", salarioTotal="
+				+ salarioTotal + ", funcMes=" + funcMes + ", tempoServico=" + tempoServico + "]";
 	}
 }

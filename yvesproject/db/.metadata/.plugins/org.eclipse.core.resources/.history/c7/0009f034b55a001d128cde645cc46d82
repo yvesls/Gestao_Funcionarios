@@ -1,0 +1,63 @@
+package com.mycompany.gestaofuncionarios.presenter;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+
+import com.mycompany.gestaofuncionarios.DAO.FuncionarioSQLiteDAO;
+import com.mycompany.gestaofuncionarios.model.Funcionario;
+import com.mycompany.gestaofuncionarios.view.ViewCriarFuncionario;
+@supressWarnings("unchecad")
+public class CriarFuncionarioPresenter {
+
+    private Funcionario func;
+    private String erro;
+
+    public CriarFuncionarioPresenter(final ViewCriarFuncionario viewCriarFuncionario) throws Exception {
+        viewCriarFuncionario.getBtnFecharCriarFuncionario().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewCriarFuncionario.getFrame().setVisible(false);
+            }
+        });
+
+        viewCriarFuncionario.getBtnSalvarCriarFuncionario().addActionListener((ActionEvent e) -> {
+            if ((viewCriarFuncionario.getTextCargo().getText() == null || viewCriarFuncionario.getTextCargo().getText().trim().equals("")) || (viewCriarFuncionario.getTextNome().getText() == null || viewCriarFuncionario.getTextNome().getText().trim().equals("")) || (viewCriarFuncionario.getTextSalario().getText() == null || viewCriarFuncionario.getTextSalario().getText().trim().equals("")) || (viewCriarFuncionario.getTextIdade().getText() == null || viewCriarFuncionario.getTextIdade().getText().trim().equals("")) || (viewCriarFuncionario.getTextAdmissao().getText() == null || viewCriarFuncionario.getTextAdmissao().getText().trim().equals("")) || (viewCriarFuncionario.getTextDistTrab().getText() == null || viewCriarFuncionario.getTextDistTrab().getText().trim().equals(""))) {
+                this.erro = "Existem campos vazios!";
+                JOptionPane.showConfirmDialog(null, erro);
+            } else {
+                this.func = new Funcionario();
+                this.func.setNome(viewCriarFuncionario.getTextNome().getText());
+                this.func.setCargo(viewCriarFuncionario.getTextCargo().getText());
+                try {
+                    this.func.setSalario(Double.valueOf(viewCriarFuncionario.getTextSalario().getText()));
+                    this.func.setIdade(Integer.valueOf(viewCriarFuncionario.getTextIdade().getText()));
+                    this.func.setAdmissao(viewCriarFuncionario.getTextAdmissao().getText());
+                    this.func.setDistTrab(Integer.valueOf(viewCriarFuncionario.getTextDistTrab().getText()));
+                    try {
+    					if(this.criarNovoFuncionario()){
+    					    
+    					    JOptionPane.showMessageDialog(this,"Funcionário cadastrado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+    					    
+    					} else{
+    						JOptionPane.showMessageDialog(this,"Erro ao cadastrar funcionário!", "Erro", JOptionPane.ERROR_MESSAGE);
+    					}
+    				} catch (Exception e1) {
+    					// TODO Auto-generated catch block
+    					e1.printStackTrace();
+    				}
+                    viewCriarFuncionario.getFrame().setVisible(false);
+                } catch (NumberFormatException e1) {
+                    e1.printStackTrace();
+                    this.erro = "Digite valores válidos!";
+                    JOptionPane.showConfirmDialog(null, erro);
+                }
+            }
+        });
+    }
+
+    public boolean criarNovoFuncionario() throws Exception {
+
+        FuncionarioSQLiteDAO dao = new FuncionarioSQLiteDAO();
+        return dao.salvar(this.func);
+    }
+}

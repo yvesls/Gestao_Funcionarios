@@ -11,6 +11,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.DAOSQLiteFactory;
+import DAO.DAOSingleton;
 import DAO.FuncionarioSQLiteDAO;
 import model.Funcionario;
 import view.ViewCriarFuncionario;
@@ -132,7 +134,8 @@ public class FuncionarioPresenter {
 	}
 
 	public void carregarFuncionarios(ViewFuncionario viewFuncionario) throws SQLException {
-		funcs = new FuncionarioSQLiteDAO().getListFuncDAO();
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		funcs = DAOSingleton.getInstance().getFuncionarioSqliteDAO().getListFuncDAO();
 		DefaultTableModel modelo = (DefaultTableModel) viewFuncionario.getTable().getModel();
 		modelo.setNumRows(0);
 		for (Funcionario funcionario : funcs) {

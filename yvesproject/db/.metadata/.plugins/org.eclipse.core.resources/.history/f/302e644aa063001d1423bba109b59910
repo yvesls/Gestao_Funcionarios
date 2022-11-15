@@ -1,0 +1,80 @@
+package presenter;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import DAO.FuncionarioSQLiteDAO;
+import DAO.SalarioSQLiteDAO;
+import model.Salario;
+import view.ViewCalculadoraBonus;
+
+public class CalculadoraBonusPresenter {
+	private ViewCalculadoraBonus view;
+	private List<Salario> salarios;
+
+	public CalculadoraBonusPresenter(ViewCalculadoraBonus view) {
+		this.view = view;
+		this.getAcoesDaView();
+	}
+
+	public void getAcoesDaView() {
+		view.getBtnCalcular().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (view.getTextDataDosFuncionarios().getText() != "") {
+					if (!carregarSalariosData(view.getTextDataDosFuncionarios().getText())) {
+						JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum registro nessa data inserida.", "Erro",
+								JOptionPane.ERROR_MESSAGE);
+						listarSalariosEncontrados
+					}
+				}
+			}
+		});
+
+		view.getBtnBuscar().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (view.getTextDataDosFuncionarios().getText() != "") {
+					FuncionarioSQLiteDAO dao = new FuncionarioSQLiteDAO();
+
+				}
+			}
+		});
+
+		view.getBtnListarTodos().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		view.getBtnBuscar().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		view.getBtnFechar().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				view.getFrame().setVisible(false);
+			}
+		});
+	}
+
+	public ViewCalculadoraBonus getViewCalculadoraBonus() {
+		return view;
+	}
+
+	public boolean carregarSalariosData(String data) {
+		SalarioSQLiteDAO daoSalario = new SalarioSQLiteDAO();
+		this.salarios = daoSalario.getTodosSalariosMes(data);
+		if(this.salarios != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void listarSalariosEncontrados() {
+		
+	}
+}

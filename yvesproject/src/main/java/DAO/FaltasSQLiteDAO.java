@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import model.FaltaAoTrabalho;
 import model.Funcionario;
 
-public class FaltasSQLiteDAO extends ConexaoFactory{
+public class FaltasSQLiteDAO extends DAOSQLiteConexao{
 	
 	public void ifIsCriarTbFaltas() {
 		conectar();

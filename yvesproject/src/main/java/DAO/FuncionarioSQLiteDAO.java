@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Funcionario;
 
-public class FuncionarioSQLiteDAO extends ConexaoFactory {
+public class FuncionarioSQLiteDAO extends DAOSQLiteConexao  implements IFuncionarioSQLiteDAO {
 
 	public boolean salvar(Funcionario funcionario) {
 		PreparedStatement stmt = null;
