@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import DAO.BonusSQLiteDAO;
 import DAO.FaltasSQLiteDAO;
 import DAO.FuncionarioSQLiteDAO;
@@ -13,14 +15,14 @@ import view.ViewCalculadoraBonus;
 import view.ViewFuncionario;
 import view.ViewPrincipal;
 
-
 public class PrincipalPresenter {
 	private ViewPrincipal view;
+
 	public PrincipalPresenter(ViewPrincipal viewPrincipal) {
 		this.view = viewPrincipal;
 		this.gerarBotoesView();
 	}
-	
+
 	public void gerarBotoesView() {
 		view.getBtnFuncionarios().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -45,7 +47,7 @@ public class PrincipalPresenter {
 				});
 			}
 		});
-		
+
 		view.getBtnCalcularSalarios().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable() {
@@ -57,6 +59,30 @@ public class PrincipalPresenter {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+					}
+				});
+			}
+		});
+
+		view.getBtnInfoSistema().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						JOptionPane.showMessageDialog(null,
+								"Requisito funcional não criado.",
+								"Atenção", JOptionPane.INFORMATION_MESSAGE);
+					}
+				});
+			}
+		});
+		
+		view.getBtnEstatisticas().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						JOptionPane.showMessageDialog(null,
+								"Requisito funcional não criado.",
+								"Atenção", JOptionPane.INFORMATION_MESSAGE);
 					}
 				});
 			}

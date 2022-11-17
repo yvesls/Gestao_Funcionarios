@@ -50,18 +50,10 @@ public class ViewPrincipal {
 		frame.setResizable(false);
 		
 		btnInfoSistema = new JButton("Informações do Sistema");
-		btnInfoSistema.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnInfoSistema.setBounds(673, 63, 171, 23);
 		frame.getContentPane().add(btnInfoSistema);
 		
 		btnFuncionarios = new JButton("Funcionários");
-		btnFuncionarios.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnFuncionarios.setBounds(23, 63, 171, 23);
 		frame.getContentPane().add(btnFuncionarios);
 		
