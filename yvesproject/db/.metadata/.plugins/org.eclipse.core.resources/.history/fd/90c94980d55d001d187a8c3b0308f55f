@@ -1,5 +1,0 @@
-package com.mycompany.gestaofuncionarios.presenter.states.copy;
-
-public class FuncionarioEditacaoState {
-
-}
