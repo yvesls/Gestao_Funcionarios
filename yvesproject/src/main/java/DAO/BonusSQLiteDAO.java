@@ -84,6 +84,38 @@ public class BonusSQLiteDAO extends DAOSQLiteConexao {
 		return listaBonus;
 	}
 
+	public List<Bonus> getListTodosBonusFunc(int idFunc) {
+		conectar();
+		List<Bonus> listaBonus = new ArrayList<>();
+		Bonus bonus = new Bonus();
+		ResultSet result = null;
+		PreparedStatement stmt = null;
+		String sql = "SELECT id_funcionario, valor_bonus, tipo_bonus, data_bonus FROM tb_bonus WHERE id_funcionario = '" + idFunc + "';";
+
+		stmt = this.criarStatement(sql);
+		try {
+			result = stmt.executeQuery();
+			while (result.next()) {
+				bonus = new Bonus(result.getInt("id_funcionario"), result.getString("tipo_bonus"), result.getString("data_bonus"), result.getDouble("valor_bonus"));
+				listaBonus.add(bonus);
+			}
+			fechar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					Logger.getLogger(BonusSQLiteDAO.class.getName(), null).log(Level.SEVERE, null, e);
+				}
+			}
+		}
+		return listaBonus;
+	}
+	
 	public List<Bonus> getListTodosBonusFuncMesId(String data, int idFunc) {
 		conectar();
 		List<Bonus> listaBonus = new ArrayList<>();

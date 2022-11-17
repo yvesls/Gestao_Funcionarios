@@ -27,7 +27,6 @@ public class FaltasSQLiteDAO extends DAOSQLiteConexao{
 				+ "    FOREIGN KEY (id_funcionario) REFERENCES tb_funcionario (id)"
 				+ ");";
 		PreparedStatement stmt = criarStatement(sql);
-		System.out.println(stmt);
 		try {
 			stmt.executeUpdate();
 			fechar();

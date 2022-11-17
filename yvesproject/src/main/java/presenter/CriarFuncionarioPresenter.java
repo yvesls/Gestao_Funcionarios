@@ -4,11 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-import DAO.BonusSQLiteDAO;
 import DAO.DAOSQLiteFactory;
 import DAO.DAOSingleton;
-import DAO.FuncionarioSQLiteDAO;
-import DAO.SalarioSQLiteDAO;
 import model.Bonus;
 import model.Funcionario;
 import model.Salario;
@@ -17,9 +14,8 @@ import view.ViewCriarFuncionario;
 public class CriarFuncionarioPresenter {
 	private ViewCriarFuncionario view;
 	private Funcionario func;
-	private String erro;
 
-	public CriarFuncionarioPresenter(final ViewCriarFuncionario viewCriarFuncionario) throws Exception {
+	public CriarFuncionarioPresenter(final ViewCriarFuncionario viewCriarFuncionario) {
 		this.view = viewCriarFuncionario;
 		this.getAcoesDaView();
 	}
@@ -39,53 +35,37 @@ public class CriarFuncionarioPresenter {
 					|| (view.getTextAdmissao().getText() == null || view.getTextAdmissao().getText().trim().equals(""))
 					|| (view.getTextDistTrab().getText() == null
 							|| view.getTextDistTrab().getText().trim().equals(""))) {
-				this.erro = "Existem campos vazios!";
-				JOptionPane.showConfirmDialog(null, erro);
+				JOptionPane.showConfirmDialog(null, "Existem campos vazios!");
 			} else {
-				try {
-					this.func = new Funcionario(view.getTextNome().getText(), view.getTextCargo().getText(),
-							Integer.valueOf(view.getTextIdade().getText()),
-							Double.valueOf(view.getTextSalario().getText()),
-							Integer.valueOf(view.getTextDistTrab().getText()), view.getTextAdmissao().getText(), 0.0);
-					
-					try {
-						if (this.criarNovoFuncionario()) {
-							getFuncionarioCadastrado(this.func.getNome());
-							Salario sal = new Salario(this.func.getSalario(), this.func.getSalario());
-							Bonus bonus = new Bonus(this.func.getFuncId());
-							if (this.registrarSalarioFuncionario(sal) && registrarBonusFuncionario(bonus)) {
-								JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!", "Atenção",
-										JOptionPane.INFORMATION_MESSAGE);
-								view.getFrame().setVisible(false);
-							}
-						} else {
-							JOptionPane.showMessageDialog(null, "Erro ao cadastrar funcionário!", "Erro",
-									JOptionPane.ERROR_MESSAGE);
-						}
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+				this.func = new Funcionario(view.getTextNome().getText(), view.getTextCargo().getText(),
+						Integer.valueOf(view.getTextIdade().getText()), Double.valueOf(view.getTextSalario().getText()),
+						Integer.valueOf(view.getTextDistTrab().getText()), view.getTextAdmissao().getText(), 0.0);
+
+				if (this.criarNovoFuncionario()) {
+					getFuncionarioCadastrado(this.func.getNome());
+					Salario sal = new Salario(this.func.getSalario(), this.func.getSalario());
+					Bonus bonus = new Bonus(this.func.getFuncId());
+					if (this.registrarSalarioFuncionario(sal) && registrarBonusFuncionario(bonus)) {
+						JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!", "Atenção",
+								JOptionPane.INFORMATION_MESSAGE);
+						view.getFrame().setVisible(false);
 					}
-				} catch (NumberFormatException e1) {
-					e1.printStackTrace();
-					this.erro = "Digite valores válidos!";
-					JOptionPane.showConfirmDialog(null, erro);
-				} catch (Exception e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao cadastrar funcionário, tente novamente.", "Erro",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 	}
 
-	public boolean criarNovoFuncionario() throws Exception {
+	public boolean criarNovoFuncionario() {
 		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
 		return DAOSingleton.getInstance().getFuncionarioSqliteDAO().salvar(this.func);
 	}
-	
+
 	public Funcionario getFuncionarioCadastrado(String nome) {
 		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
-		this.func = DAOSingleton.getInstance().getFuncionarioSqliteDAO().getFuncionario(nome).get(0);
+		this.func = DAOSingleton.getInstance().getFuncionarioSqliteDAO().getFuncionarioPorNome(nome).get(0);
 		return this.func;
 	}
 

@@ -2,10 +2,9 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.time.LocalDate;
-
 import javax.swing.JOptionPane;
-
 import DAO.DAOSQLiteFactory;
 import DAO.DAOSingleton;
 import DAO.FaltasSQLiteDAO;
@@ -23,13 +22,28 @@ public class ManterFuncionarioPresenter {
 	private FuncionarioStates state;
 	private int qtdFalta;
 
-	public ManterFuncionarioPresenter(final ViewManterFuncionario viewManterFuncionario, Funcionario func)
-			throws Exception {
+	public ManterFuncionarioPresenter(final ViewManterFuncionario viewManterFuncionario, Funcionario func) {
 		this.func = func;
 		this.viewManterFuncionario = viewManterFuncionario;
-		this.setFuncionarioState(new FuncionarioVisualizacaoStates(this));
+		try {
+			this.setFuncionarioState(new FuncionarioVisualizacaoStates(this));
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,
+					"Ocorreu um erro inesperado ao definir o estado da tela 'manter funcionario', entre em contato com o suporte.",
+					"Atenção", JOptionPane.INFORMATION_MESSAGE);
+			e.printStackTrace();
+		}
+		try {
+			this.setaCamposFunc();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Ocorreu um problema ao resgatar um dos campos de visualização de funcionário!", "Erro",
+					JOptionPane.ERROR_MESSAGE);
+			this.viewManterFuncionario.getFrame().setVisible(false);
+			e.printStackTrace();
+		}
 		this.getAcoesDaView();
-		this.setaCamposFunc();
+		
 	}
 
 	public void getAcoesDaView() {
@@ -51,7 +65,8 @@ public class ManterFuncionarioPresenter {
 								JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Erro ao atualizar dados do funcionário!", "Erro",
+							JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();
 				}
 			}
@@ -92,6 +107,9 @@ public class ManterFuncionarioPresenter {
 		getViewManterFuncionario().getLblIdFunc().setText(String.valueOf(func.getFuncId()));
 		getViewManterFuncionario().getTextFaltas().setText(String.valueOf(carregarFaltaFuncionarioSelecionado(func)));
 		getViewManterFuncionario().getLblNumFaltas().setText(String.valueOf(carregarFaltaFuncionarioSelecionado(func)));
+		getViewManterFuncionario().getTextTempoServico().setText(String.valueOf(func.getTempoServico()));
+		getViewManterFuncionario().getChckbxFuncMes().setSelected(func.getIsFuncionarioDoMes());
+		getViewManterFuncionario().getLblSalarioTotal().setText(String.valueOf(func.getSalarioTotal()));
 	}
 
 	private boolean excluirFunc() {
@@ -122,7 +140,7 @@ public class ManterFuncionarioPresenter {
 		}
 	}
 
-	public boolean salvarFunc() throws NumberFormatException, Exception {
+	public boolean salvarFunc() throws NumberFormatException {
 		if ((getViewManterFuncionario().getTextCargo().getText() == null
 				|| getViewManterFuncionario().getTextCargo().getText().trim().equals(""))
 				|| (getViewManterFuncionario().getTextNome().getText() == null
@@ -140,38 +158,34 @@ public class ManterFuncionarioPresenter {
 						getViewManterFuncionario().getTextNome().getText(),
 						getViewManterFuncionario().getTextCargo().getText(),
 						Integer.valueOf(getViewManterFuncionario().getTextIdade().getText()),
-						0.0,
+						Double.valueOf(getViewManterFuncionario().getLblSalarioTotal().getText()),
 						Double.valueOf(getViewManterFuncionario().getTextSalario().getText()),
 						Integer.valueOf(getViewManterFuncionario().getTextDistTrab().getText()),
 						String.valueOf(getViewManterFuncionario().getLblAdmissao().getText()),
 						getViewManterFuncionario().getChckbxFuncMes().isEnabled(),
 						Double.valueOf(getViewManterFuncionario().getTextTempoServico().getText()));
-			} catch (NumberFormatException e1) {
+				this.func.addFalta(new FaltaAoTrabalho(Integer.valueOf(getViewManterFuncionario().getTextFaltas().getText())));
+				FuncionarioSQLiteDAO dao = new FuncionarioSQLiteDAO();
+				try {
+					if (dao.alterarFuncionario(this.func) && alterarFaltasFunc()) {
+						return true;
+					}
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Erro ao atualizar dados do funcionário!", "Erro",
+							JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
+			} catch (Exception e1) {
 				e1.printStackTrace();
 				JOptionPane.showConfirmDialog(null, "Digite valores válidos!");
-			}
-			this.func.addFalta(
-					new FaltaAoTrabalho(Integer.valueOf(getViewManterFuncionario().getTextFaltas().getText())));
-			FuncionarioSQLiteDAO dao = new FuncionarioSQLiteDAO();
-
-			try {
-				if (dao.alterarFuncionario(this.func) && alterarFaltasFunc()) {
-					return true;
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 
 		return false;
 	}
 
-	public void visualizarFunc() {
-		try {
-			state.salvar();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void visualizarFunc() throws Exception {
+		state.salvar();
 	}
 
 	public Funcionario getFunc() {
@@ -182,7 +196,7 @@ public class ManterFuncionarioPresenter {
 		return viewManterFuncionario;
 	}
 
-	public int carregarFaltaFuncionarioSelecionado(Funcionario func) throws Exception {
+	public int carregarFaltaFuncionarioSelecionado(Funcionario func) throws ParseException, Exception {
 		LocalDate data = LocalDate.now();
 		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
 		

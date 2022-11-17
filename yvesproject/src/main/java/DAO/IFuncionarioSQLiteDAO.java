@@ -15,7 +15,7 @@ public interface IFuncionarioSQLiteDAO {
 
 	public boolean excluirFuncionario(int pCodigo);
 
-	public List<Funcionario> getFuncionario(String nome);
+	public List<Funcionario> getFuncionarioPorNome(String nome);
 
 	public Funcionario getFuncionariosPorId(int idFunc);
 

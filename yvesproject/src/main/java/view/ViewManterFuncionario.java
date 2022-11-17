@@ -31,6 +31,7 @@ public class ViewManterFuncionario {
 	private JTextField textFaltas;
 	private JTextField textTempoServico;
 	private JLabel lblTempoServico;
+	private JLabel lblSalarioTotal;
 	/**
 	 * Create the application.
 	 */
@@ -43,7 +44,7 @@ public class ViewManterFuncionario {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame.setBounds(100, 100, 636, 270);
+		frame.setBounds(100, 100, 791, 270);
 		frame.getContentPane().setLayout(null);
 		
 		btnFecharManterFuniconario = new JButton("Fechar");
@@ -53,42 +54,42 @@ public class ViewManterFuncionario {
 		
 		btnSalvarModificacaoFuncionario = new JButton("Salvar");
 		btnSalvarModificacaoFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSalvarModificacaoFuncionario.setBounds(520, 197, 89, 23);
+		btnSalvarModificacaoFuncionario.setBounds(676, 197, 89, 23);
 		frame.getContentPane().add(btnSalvarModificacaoFuncionario);
 		
 		btnExcluirFuncionario = new JButton("Excluir");
 		btnExcluirFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnExcluirFuncionario.setBounds(322, 197, 89, 23);
+		btnExcluirFuncionario.setBounds(478, 197, 89, 23);
 		frame.getContentPane().add(btnExcluirFuncionario);
 		
 		btnEditarFuncionario = new JButton("Editar");
 		btnEditarFuncionario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnEditarFuncionario.setBounds(421, 197, 89, 23);
+		btnEditarFuncionario.setBounds(577, 197, 89, 23);
 		frame.getContentPane().add(btnEditarFuncionario);
 		
 		lblNome = new JLabel("");
 		lblNome.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNome.setBounds(66, 11, 334, 23);
+		lblNome.setBounds(66, 11, 310, 23);
 		frame.getContentPane().add(lblNome);
 		
 		lblCargo = new JLabel("");
 		lblCargo.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCargo.setBounds(381, 54, 228, 23);
+		lblCargo.setBounds(480, 54, 285, 23);
 		frame.getContentPane().add(lblCargo);
 		
 		lblIdade = new JLabel("");
 		lblIdade.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblIdade.setBounds(385, 102, 47, 23);
+		lblIdade.setBounds(442, 102, 75, 23);
 		frame.getContentPane().add(lblIdade);
 		
 		lblAdmissao = new JLabel("");
 		lblAdmissao.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAdmissao.setBounds(207, 54, 98, 23);
+		lblAdmissao.setBounds(328, 54, 89, 23);
 		frame.getContentPane().add(lblAdmissao);
 		
 		lblSalario = new JLabel("");
 		lblSalario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSalario.setBounds(472, 11, 127, 23);
+		lblSalario.setBounds(628, 11, 137, 23);
 		frame.getContentPane().add(lblSalario);
 		
 		lblDistanciaTrab = new JLabel("");
@@ -103,48 +104,48 @@ public class ViewManterFuncionario {
 		
 		JLabel lblCargo_2 = new JLabel("Cargo:");
 		lblCargo_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblCargo_2.setBounds(318, 54, 53, 23);
+		lblCargo_2.setBounds(427, 54, 53, 23);
 		frame.getContentPane().add(lblCargo_2);
 		
 		JLabel lblAdmissao_1 = new JLabel("Admissão:");
 		lblAdmissao_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblAdmissao_1.setBounds(122, 54, 75, 23);
+		lblAdmissao_1.setBounds(243, 54, 75, 23);
 		frame.getContentPane().add(lblAdmissao_1);
 		
-		JLabel lblDistnciaDoTrabalho = new JLabel("Distância do Trabalho:");
+		JLabel lblDistnciaDoTrabalho = new JLabel("Distância do trabalho:");
 		lblDistnciaDoTrabalho.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblDistnciaDoTrabalho.setBounds(10, 102, 160, 23);
 		frame.getContentPane().add(lblDistnciaDoTrabalho);
 		
 		JLabel lblIdade_2 = new JLabel("Idade:");
 		lblIdade_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblIdade_2.setBounds(322, 102, 47, 23);
+		lblIdade_2.setBounds(385, 102, 47, 23);
 		frame.getContentPane().add(lblIdade_2);
 		
-		JLabel lblSalrio = new JLabel("Salário:");
+		JLabel lblSalrio = new JLabel("Salário base:");
 		lblSalrio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSalrio.setBounds(410, 11, 60, 23);
+		lblSalrio.setBounds(514, 11, 104, 23);
 		frame.getContentPane().add(lblSalrio);
 		
 		lblIdFunc = new JLabel("");
 		lblIdFunc.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblIdFunc.setBounds(41, 54, 75, 23);
+		lblIdFunc.setBounds(436, 11, 53, 23);
 		frame.getContentPane().add(lblIdFunc);
 		
 		JLabel lblId = new JLabel("Id:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblId.setBounds(10, 54, 31, 23);
+		lblId.setBounds(401, 11, 31, 23);
 		frame.getContentPane().add(lblId);
 		
 		textNome = new JTextField();
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textNome.setBounds(66, 14, 334, 20);
+		textNome.setBounds(66, 14, 290, 20);
 		frame.getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
 		textSalario = new JTextField();
 		textSalario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textSalario.setBounds(472, 14, 137, 20);
+		textSalario.setBounds(628, 11, 137, 20);
 		frame.getContentPane().add(textSalario);
 		textSalario.setColumns(10);
 		
@@ -156,13 +157,13 @@ public class ViewManterFuncionario {
 		
 		textCargo = new JTextField();
 		textCargo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textCargo.setBounds(381, 57, 229, 20);
+		textCargo.setBounds(490, 54, 275, 20);
 		frame.getContentPane().add(textCargo);
 		textCargo.setColumns(10);
 		
 		textIdade = new JTextField();
 		textIdade.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textIdade.setBounds(384, 102, 226, 20);
+		textIdade.setBounds(442, 102, 75, 20);
 		frame.getContentPane().add(textIdade);
 		textIdade.setColumns(10);
 		
@@ -173,7 +174,7 @@ public class ViewManterFuncionario {
 		
 		chckbxFuncMes = new JCheckBox("Funcionário do mês");
 		chckbxFuncMes.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		chckbxFuncMes.setBounds(207, 154, 183, 23);
+		chckbxFuncMes.setBounds(582, 102, 183, 23);
 		frame.getContentPane().add(chckbxFuncMes);
 		
 		lblNumFaltas = new JLabel("0");
@@ -188,15 +189,25 @@ public class ViewManterFuncionario {
 		textFaltas.setColumns(10);
 		
 		lblTempoServico = new JLabel("Tempo de serviço:");
-		lblTempoServico.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTempoServico.setBounds(381, 160, 129, 14);
+		lblTempoServico.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTempoServico.setBounds(201, 155, 137, 20);
 		frame.getContentPane().add(lblTempoServico);
 		
 		textTempoServico = new JTextField();
 		textTempoServico.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textTempoServico.setBounds(523, 157, 86, 20);
+		textTempoServico.setBounds(348, 155, 86, 20);
 		frame.getContentPane().add(textTempoServico);
 		textTempoServico.setColumns(10);
+		
+		JLabel lblSalarioTotal_1 = new JLabel("Salário total:");
+		lblSalarioTotal_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSalarioTotal_1.setBounds(10, 54, 106, 23);
+		frame.getContentPane().add(lblSalarioTotal_1);
+		
+		lblSalarioTotal = new JLabel("");
+		lblSalarioTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblSalarioTotal.setBounds(117, 54, 116, 23);
+		frame.getContentPane().add(lblSalarioTotal);
 		
 	}
 
@@ -287,4 +298,10 @@ public class ViewManterFuncionario {
 	public JLabel getLblTempoServico() {
 		return lblTempoServico;
 	}
+
+	public JLabel getLblSalarioTotal() {
+		return lblSalarioTotal;
+	}
+	
+	
 }

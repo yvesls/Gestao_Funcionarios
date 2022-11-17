@@ -71,7 +71,6 @@ public class ViewCalculadoraBonus {
 		tableSalariosCalculados.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		model2 = new DefaultTableModel();
 		Object[] column2 = {"Funcionário", "Data", "Salário base (R$)", "Bônus (R$)", "Salário (R$)"};
-		//Object[] row = new Object[0];
 		model2.setColumnIdentifiers(column2);
 		tableSalariosCalculados.setModel(model2);
 		scrollPane2.setViewportView(tableSalariosCalculados);

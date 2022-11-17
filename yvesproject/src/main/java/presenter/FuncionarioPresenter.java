@@ -13,16 +13,17 @@ import javax.swing.table.DefaultTableModel;
 
 import DAO.DAOSQLiteFactory;
 import DAO.DAOSingleton;
-import DAO.FuncionarioSQLiteDAO;
 import model.Funcionario;
 import view.ViewCriarFuncionario;
 import view.ViewFuncionario;
 import view.ViewManterFuncionario;
+import view.ViewVerBonus;
 
 public class FuncionarioPresenter {
 	private List<Funcionario> funcs;
 	private Funcionario funcSelecionado;
 	private ViewFuncionario view;
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -76,17 +77,28 @@ public class FuncionarioPresenter {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
-						try {
-							if (funcSelecionado != null) {
-								
-								ViewManterFuncionario window = new ViewManterFuncionario();
-								window.getFrame().setVisible(true);
-								new ManterFuncionarioPresenter(window, funcSelecionado);
-							} else {
-								JOptionPane.showMessageDialog(null, "É preciso selecionar um funcionário primeiro!");
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
+						if (funcSelecionado != null) {
+							ViewManterFuncionario window = new ViewManterFuncionario();
+							window.getFrame().setVisible(true);
+							new ManterFuncionarioPresenter(window, funcSelecionado);
+						} else {
+							JOptionPane.showMessageDialog(null, "É preciso selecionar um funcionário primeiro!");
+						}
+					}
+				});
+			}
+		});
+
+		this.view.getBtnVerBonus().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						if (funcSelecionado != null) {
+							ViewVerBonus window = new ViewVerBonus();
+							window.getFrame().setVisible(true);
+							new VerBonusPresenter(window, funcSelecionado);
+						} else {
+							JOptionPane.showMessageDialog(null, "É preciso selecionar um funcionário primeiro!");
 						}
 					}
 				});
@@ -97,20 +109,17 @@ public class FuncionarioPresenter {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
-						String nome = view.getTextFieldCampoBuscar().getText();
-						if (nome != "") {
-							funcs = new FuncionarioSQLiteDAO().getFuncionario(nome);
-							if (!funcs.isEmpty()) {
-								DefaultTableModel modelo = (DefaultTableModel) view.getTable().getModel();
-								modelo.setNumRows(0);
-								for (Funcionario funcionario : funcs) {
-									modelo.addRow(new Object[] { funcionario.getFuncId(), funcionario.getNome(),
-											funcionario.getIdade(), funcionario.getCargo(), funcionario.getAdmissao(),
-											funcionario.getSalario() });
-								}
-							} else {
+						String nome = String.valueOf(view.getTextFieldCampoBuscar().getText());
+						if (!nome.equals("")) {
+							try {
+								carregarFuncionariosPorNome(nome);
+								listarFuncionarios();
+								view.getTextFieldCampoBuscar().setText("");
+							} catch (SQLException e) {
 								JOptionPane.showMessageDialog(null,
-										"O funcionario buscado não se encontra na nossa base de dados!");
+										"Ocorreu um erro inesperado ao tentar buscar no banco de dados, tente novamente mais tarde.",
+										"Atenção", JOptionPane.INFORMATION_MESSAGE);
+								e.printStackTrace();
 							}
 						} else {
 							JOptionPane.showMessageDialog(null, "É preciso digitar um nome primeiro!");
@@ -123,24 +132,39 @@ public class FuncionarioPresenter {
 		this.view.getBtnAtualizarLista().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					carregarFuncionarios(view);
+					carregarFuncionarios();
+					listarFuncionarios();
 					view.getTextFieldCampoBuscar().setText("");
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null,
+							"Ocorreu um erro inesperado ao tentar buscar no banco de dados, tente novamente mais tarde.",
+							"Atenção", JOptionPane.INFORMATION_MESSAGE);
 					e1.printStackTrace();
 				}
 			}
 		});
 	}
 
-	public void carregarFuncionarios(ViewFuncionario viewFuncionario) throws SQLException {
-		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
-		funcs = DAOSingleton.getInstance().getFuncionarioSqliteDAO().getListFuncDAO();
-		DefaultTableModel modelo = (DefaultTableModel) viewFuncionario.getTable().getModel();
-		modelo.setNumRows(0);
-		for (Funcionario funcionario : funcs) {
-			modelo.addRow(new Object[] { funcionario.getFuncId(), funcionario.getNome(), funcionario.getIdade(),
-					funcionario.getCargo(), funcionario.getAdmissao(), funcionario.getSalario() });
+	public void listarFuncionarios() {
+		if (!funcs.isEmpty()) {
+			DefaultTableModel modelo = (DefaultTableModel) this.view.getTable().getModel();
+			modelo.setNumRows(0);
+			for (Funcionario funcionario : this.funcs) {
+				modelo.addRow(new Object[] { funcionario.getFuncId(), funcionario.getNome(), funcionario.getIdade(),
+						funcionario.getCargo(), funcionario.getAdmissao(), funcionario.getSalario() });
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Não encontrado nenhum registro similar.");
 		}
+	}
+
+	public void carregarFuncionarios() throws SQLException {
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		this.funcs = DAOSingleton.getInstance().getFuncionarioSqliteDAO().getListFuncDAO();
+	}
+
+	public void carregarFuncionariosPorNome(String nome) throws SQLException {
+		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		this.funcs = DAOSingleton.getInstance().getFuncionarioSqliteDAO().getFuncionarioPorNome(nome);
 	}
 }

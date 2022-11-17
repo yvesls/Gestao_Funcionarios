@@ -129,7 +129,7 @@ public class CalculadoraBonusPresenter {
 		this.valorBonus = new ArrayList<>();
 		for (Salario salario : this.salarios) {
 			this.funcs.add(this.carregarFuncionariosPorId(salario.getIdFunc()));
-			this.valorBonus.add(carregarBonusPorDataIdFunc(dataDaProcura, salario.getIdFunc()));
+			this.valorBonus.add(carregarBonusPorDataIdFunc(salario.getData(), salario.getIdFunc()));
 		}
 	}
 
