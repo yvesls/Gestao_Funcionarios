@@ -34,7 +34,7 @@ public class CalculaBonusPorDistancia extends CalculaBonusAbstract {
 					(Double.valueOf(func.getSalarioTotal()) + (Double.valueOf(func.getSalario()) * valorBonus)), data);
 			func = new Funcionario(func.getFuncId(), func.getNome(), func.getCargo(), func.getIdade(),
 					(Double.valueOf(func.getSalarioTotal()) + (Double.valueOf(func.getSalario()) * valorBonus)),
-					func.getSalario(), func.getDistTrab(), func.getAdmissao(), func.getIsFuncionarioDoMes(),
+					func.getSalario(), Double.valueOf(func.getDistTrab()), func.getAdmissao(), func.getIsFuncionarioDoMes(),
 					func.getTempoServico());
 			registrarCalculos(this.bonus, func, this.salario);
 		}

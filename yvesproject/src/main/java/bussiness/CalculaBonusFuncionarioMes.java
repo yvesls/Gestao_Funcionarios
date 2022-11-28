@@ -20,7 +20,7 @@ public class CalculaBonusFuncionarioMes extends CalculaBonusAbstract {
 			this.bonus = new Bonus(func.getFuncId(), "Funcionario do mês", data, 200.0);
 			this.salario = new Salario(func.getFuncId(), func.getSalario(),  Double.valueOf(func.getSalarioTotal()) + 200, data);
 			func = new Funcionario(func.getFuncId(), func.getNome(), func.getCargo(), func.getIdade(),
-					Double.valueOf(func.getSalarioTotal()) + 200, func.getSalario(), func.getDistTrab(),
+					Double.valueOf(func.getSalarioTotal()) + 200, func.getSalario(), Double.valueOf(func.getDistTrab()),
 					func.getAdmissao(), func.getIsFuncionarioDoMes(), func.getTempoServico());
 			registrarCalculos(this.bonus, func, this.salario);
 		}

@@ -32,13 +32,13 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao  implements IFunciona
 
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, funcionario.getNome());
-			stmt.setInt(2, funcionario.getDistTrab());
+			stmt.setDouble(2, funcionario.getDistTrab());
 			stmt.setInt(3, funcionario.getIdade());
 			stmt.setString(4, funcionario.getCargo());
 			stmt.setString(5, String.valueOf(funcionario.getAdmissao()));
 			stmt.setDouble(6, funcionario.getSalario());
 			stmt.setBoolean(7, false);
-			stmt.setDouble(8, funcionario.getSalarioTotal());
+			stmt.setDouble(8, funcionario.getSalario());
 			stmt.setDouble(9, funcionario.getTempoServico());
 
 			stmt.executeUpdate();
@@ -77,7 +77,7 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao  implements IFunciona
 			while (result.next()) {
 				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"), result.getString("cargo"),
 						result.getInt("idade"), result.getDouble("salario_total"), result.getDouble("salario"),
-						result.getInt("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
+						result.getDouble("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
 						result.getDouble("tempo_servico"));
 				listaFunc.add(func);
 			}
@@ -116,7 +116,7 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao  implements IFunciona
 			while (result.next()) {
 				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"), result.getString("cargo"),
 						result.getInt("idade"), result.getDouble("salario_total"), result.getDouble("salario"),
-						result.getInt("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
+						result.getDouble("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
 						result.getDouble("tempo_servico"));
 				listaFunc.add(func);
 			}
@@ -215,7 +215,7 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao  implements IFunciona
 			while (result.next()) {
 				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"), result.getString("cargo"),
 						result.getInt("idade"), result.getDouble("salario_total"), result.getDouble("salario"),
-						result.getInt("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
+						result.getDouble("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
 						result.getDouble("tempo_servico"));
 
 				listaFunc.add(func);
@@ -254,7 +254,7 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao  implements IFunciona
 			result = stmt.executeQuery();
 			func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"), result.getString("cargo"),
 					result.getInt("idade"), result.getDouble("salario_total"), result.getDouble("salario"),
-					result.getInt("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
+					result.getDouble("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
 					result.getDouble("tempo_servico"));
 			fechar();
 		} catch (SQLException e) {
@@ -282,7 +282,7 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao  implements IFunciona
 		PreparedStatement stmt = criarStatement(sql);
 		try {
 			stmt.setString(1, func.getNome());
-			stmt.setInt(2, func.getDistTrab());
+			stmt.setDouble(2, func.getDistTrab());
 			stmt.setInt(3, func.getIdade());
 			stmt.setString(4, func.getCargo());
 			stmt.setString(5, String.valueOf(func.getAdmissao()));

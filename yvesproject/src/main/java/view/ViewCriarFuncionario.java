@@ -3,8 +3,12 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.io.File;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 
 public class ViewCriarFuncionario {
 
@@ -17,6 +21,7 @@ public class ViewCriarFuncionario {
 	private JButton btnFecharCriarFuncionario;
 	private JButton btnSalvarCriarFuncionario;
 	private JTextField TextDistTrab;
+	private JButton btnCarregarArquivo;
 	
 	public ViewCriarFuncionario() {
 		this.frame = new JFrame();
@@ -93,6 +98,11 @@ public class ViewCriarFuncionario {
 		btnSalvarCriarFuncionario.setBounds(449, 211, 89, 23);
 		frame.getContentPane().add(btnSalvarCriarFuncionario);
 		
+		btnCarregarArquivo = new JButton("Carregar Arquivo");
+		btnCarregarArquivo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCarregarArquivo.setBounds(256, 211, 183, 23);
+		frame.getContentPane().add(btnCarregarArquivo);
+		
 		JLabel lblDistTrab = new JLabel("Distância do trabalho (Km):");
 		lblDistTrab.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDistTrab.setBounds(290, 32, 172, 17);
@@ -140,4 +150,10 @@ public class ViewCriarFuncionario {
 	public JTextField getTextDistTrab() {
 		return TextDistTrab;
 	}
+
+	public JButton getBtnCarregarArquivo() {
+		return btnCarregarArquivo;
+	}
+	
+	
 }

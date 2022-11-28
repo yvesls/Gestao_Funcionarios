@@ -13,9 +13,9 @@ public class CalculadoraBonusService {
 	private ProcessosCalculoBonusChain chain;
 
 	public CalculadoraBonusService(Funcionario funcionario) {
-		chain = new ProcessosCalculoBonusChain(new CalculaBonusFuncionarioMes(funcionario), 
+		chain = new ProcessosCalculoBonusChain(new CalculaBonusFuncionarioMes(funcionario),
 				new ProcessosCalculoBonusChain(new CalculaBonusPorDistancia(funcionario),
-						new ProcessosCalculoBonusChain(new CalculaBonusPorFalta(funcionario), 
+						new ProcessosCalculoBonusChain(new CalculaBonusPorFalta(funcionario),
 								new ProcessosCalculoBonusChain(new CalculaBonusPorTempoServico(funcionario), null))));
 	}
 

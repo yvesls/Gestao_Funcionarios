@@ -2,13 +2,14 @@ package presenter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.JOptionPane;
-
 import DAO.DAOSQLiteFactory;
 import DAO.DAOSingleton;
 import model.Bonus;
 import model.Funcionario;
 import model.Salario;
+import service.CarregaArquivoService;
 import view.ViewCriarFuncionario;
 
 public class CriarFuncionarioPresenter {
@@ -39,7 +40,7 @@ public class CriarFuncionarioPresenter {
 			} else {
 				this.func = new Funcionario(view.getTextNome().getText(), view.getTextCargo().getText(),
 						Integer.valueOf(view.getTextIdade().getText()), Double.valueOf(view.getTextSalario().getText()),
-						Integer.valueOf(view.getTextDistTrab().getText()), view.getTextAdmissao().getText(), 0.0);
+						Double.valueOf(view.getTextDistTrab().getText()), view.getTextAdmissao().getText(), 0.0);
 
 				if (this.criarNovoFuncionario()) {
 					getFuncionarioCadastrado(this.func.getNome());
@@ -56,6 +57,31 @@ public class CriarFuncionarioPresenter {
 				}
 			}
 		});
+		
+		this.view.getBtnCarregarArquivo().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				lerArquivo();
+			}
+		});
+	}
+
+	public void lerArquivo() {
+
+		CarregaArquivoService l = new CarregaArquivoService();
+		try {
+			for (Funcionario func : l.lerArquivo()) {
+				this.func = func;
+				criarNovoFuncionario();
+				Salario sal = new Salario(this.func.getSalario(), this.func.getSalario());
+				Bonus bonus = new Bonus(this.func.getFuncId());
+				registrarSalarioFuncionario(sal);
+				registrarBonusFuncionario(bonus);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public boolean criarNovoFuncionario() {

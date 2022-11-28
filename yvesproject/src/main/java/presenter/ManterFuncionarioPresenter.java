@@ -160,7 +160,7 @@ public class ManterFuncionarioPresenter {
 						Integer.valueOf(getViewManterFuncionario().getTextIdade().getText()),
 						Double.valueOf(getViewManterFuncionario().getLblSalarioTotal().getText()),
 						Double.valueOf(getViewManterFuncionario().getTextSalario().getText()),
-						Integer.valueOf(getViewManterFuncionario().getTextDistTrab().getText()),
+						Double.valueOf(getViewManterFuncionario().getTextDistTrab().getText()),
 						String.valueOf(getViewManterFuncionario().getLblAdmissao().getText()),
 						getViewManterFuncionario().getChckbxFuncMes().isEnabled(),
 						Double.valueOf(getViewManterFuncionario().getTextTempoServico().getText()));

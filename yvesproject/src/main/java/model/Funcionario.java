@@ -8,7 +8,7 @@ public class Funcionario {
 	private String admissao;
 	private int idade;
 	private Double salario;
-	private int distTrab;
+	private Double distTrab;
 	private int FuncId;
 	private Double salarioTotal;
 	private List<Bonus> bonusRecebidos;
@@ -25,7 +25,7 @@ public class Funcionario {
 	    this.FuncId = idFunc;
 	}
 
-	public Funcionario(String nome, String cargo, int idade, Double salario, int distTrab, String admissao, Double tempoServico) {
+	public Funcionario(String nome, String cargo, int idade, Double salario, Double distTrab, String admissao, Double tempoServico) {
 		this.nome = nome;
 		this.cargo = cargo;
 		this.idade = idade;
@@ -35,12 +35,9 @@ public class Funcionario {
 	    this.salarioTotal = salario;
 	    this.funcMes = false;
 	    this.tempoServico = tempoServico;
-	    if(salarioTotal == null) {
-	    	this.salarioTotal = this.salario;
-	    }
 	}
 	
-	public Funcionario(int funcId, String nome, String cargo, int idade, Double salario, int distTrab, String admissao, Double tempoServico) {
+	public Funcionario(int funcId, String nome, String cargo, int idade, Double salario, Double distTrab, String admissao, Double tempoServico) {
 		this.FuncId = funcId;
 		this.nome = nome;
 		this.cargo = cargo;
@@ -55,7 +52,7 @@ public class Funcionario {
 	    }
 	}
 	
-	public Funcionario(int funcId, String nome, String cargo, int idade, Double salarioTotal, Double salario, int distTrab, String admissao, boolean funcionarioMes, Double tempoServico) {
+	public Funcionario(int funcId, String nome, String cargo, int idade, Double salarioTotal, Double salario, Double distTrab, String admissao, boolean funcionarioMes, Double tempoServico) {
 		this.FuncId = funcId;
 		this.nome = nome;
 		this.cargo = cargo;
@@ -114,7 +111,7 @@ public class Funcionario {
 		return salario;
 	}
 	
-	public int getDistTrab() {
+	public Double getDistTrab() {
 		return distTrab;
 	}
 	
@@ -163,7 +160,7 @@ public class Funcionario {
 		this.salario = salario;
 	}
 
-	public void setDistTrab(int distTrab) {
+	public void setDistTrab(Double distTrab) {
 		this.distTrab = distTrab;
 	}
 
