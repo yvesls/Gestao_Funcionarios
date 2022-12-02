@@ -1,5 +1,6 @@
 package model;
 
+import bussiness.ConversorData;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
@@ -16,7 +17,8 @@ public class CalculaBonusFuncionarioMes extends CalculaBonusAbstract {
 		
 		if(func.getIsFuncionarioDoMes()) {
 			LocalDate date = LocalDate.now();
-			String data = ConverterData(date);
+                        ConversorData.instanciar();
+			String data = ConversorData.converter(date);
 			this.bonus = new Bonus(func.getFuncId(), "Funcionario do mês", data, 200.0);
 			this.salario = new Salario(func.getFuncId(), func.getSalario(),  Double.valueOf(func.getSalarioTotal()) + 200, data);
 			func = new Funcionario(func.getFuncId(), func.getNome(), func.getCargo(), func.getIdade(),

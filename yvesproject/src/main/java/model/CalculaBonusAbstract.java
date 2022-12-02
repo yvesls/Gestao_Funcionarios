@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import DAO.BonusSQLiteDAO;
 import DAO.FuncionarioSQLiteDAO;
 import DAO.SalarioSQLiteDAO;
+import bussiness.ConversorData;
 
 public abstract class CalculaBonusAbstract {
 	protected Bonus bonus;
@@ -23,7 +24,8 @@ public abstract class CalculaBonusAbstract {
 	public boolean registrar(Bonus bon, Funcionario func, Salario sal) {
 		boolean funcSalvo = false, salarioSalvo = false, bonusSalvo = false;
 		LocalDate date = LocalDate.now();
-		String data = sal.ConverterData(date);
+                ConversorData.instanciar();
+		String data = ConversorData.converter(date);
 		
 		SalarioSQLiteDAO daoSalario = new SalarioSQLiteDAO();
 		FuncionarioSQLiteDAO daoFunc = new FuncionarioSQLiteDAO();
@@ -50,16 +52,5 @@ public abstract class CalculaBonusAbstract {
 			return true;
 		}
 		return false;
-	}
-	
-	public String ConverterData(LocalDate date) {
-		String dataFormatada = "";
-		String[] split = date.toString().split("-");
-		for(int i = split.length-1; i>=0; i--) {
-			dataFormatada += split[i] + "/";
-		}
-		dataFormatada = dataFormatada.substring(0, dataFormatada.length()-1);
-		dataFormatada = dataFormatada.substring(3, dataFormatada.length());
-		return dataFormatada;
 	}
 }

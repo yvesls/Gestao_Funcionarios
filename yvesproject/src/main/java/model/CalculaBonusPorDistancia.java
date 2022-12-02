@@ -1,5 +1,6 @@
 package model;
 
+import bussiness.ConversorData;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
@@ -26,7 +27,8 @@ public class CalculaBonusPorDistancia extends CalculaBonusAbstract {
 				valorBonus = func.getSalario() * 0.07;
 			}
 			LocalDate date = LocalDate.now();
-			String data = ConverterData(date);
+                        ConversorData.instanciar();
+			String data = ConversorData.converter(date);
 			this.bonus = new Bonus(func.getFuncId(), "Distância do trabalho", data, Double.valueOf(func.getSalario())*valorBonus);
 			this.salario = new Salario(func.getFuncId(), func.getSalario(),  Double.valueOf(func.getSalarioTotal()) + Double.valueOf(func.getSalario())*valorBonus, data);
 			func = new Funcionario(func.getFuncId(), func.getNome(), func.getCargo(), func.getIdade(),
