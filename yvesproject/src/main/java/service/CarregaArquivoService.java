@@ -8,10 +8,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-
 import DAO.DAOSQLiteFactory;
 import DAO.DAOSingleton;
 import bussiness.ConversorData;
