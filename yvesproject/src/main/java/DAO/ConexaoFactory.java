@@ -9,7 +9,7 @@ import java.sql.Statement;
 public abstract class ConexaoFactory {
 	protected Connection conexao;
 	protected boolean conectar() {
-		String url = "jdbc:sqlite:db/bdfuncionariosdb.db";
+		String url = "jdbc:sqlite:db/bdfuncionarios.db";
 		try {
 			setConexao(DriverManager.getConnection(url));
 			System.out.println("Conectado com o banco de dados.");

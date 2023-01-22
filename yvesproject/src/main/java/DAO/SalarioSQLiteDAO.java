@@ -168,6 +168,7 @@ public class SalarioSQLiteDAO extends DAOSQLiteConexao {
 				}
 			}
 		}
+		System.out.println(listaSal);
 		return listaSal;
 	}
 

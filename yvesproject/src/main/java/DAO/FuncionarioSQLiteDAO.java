@@ -252,10 +252,14 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao  implements IFunciona
 		try {
 			stmt.executeQuery();
 			result = stmt.executeQuery();
-			func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"), result.getString("cargo"),
+			System.out.println(result.toString());
+			if(result != null) {
+				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"), result.getString("cargo"),
 					result.getInt("idade"), result.getDouble("salario_total"), result.getDouble("salario"),
 					result.getDouble("dist_trabalho"), result.getString("admissao"), result.getBoolean("funcionario_mes"),
 					result.getDouble("tempo_servico"));
+			}
+			
 			fechar();
 		} catch (SQLException e) {
 			e.printStackTrace();

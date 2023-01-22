@@ -77,7 +77,6 @@ public class CalculadoraBonusPresenter {
 		view.getBtnListarTodos().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!carregarTodosSalarios()) {
-
 					JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum registro.",
 							"Erro", JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -102,8 +101,9 @@ public class CalculadoraBonusPresenter {
 	
 	public boolean carregarTodosSalarios() {
 		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
+		
 		this.salarios = DAOSingleton.getInstance().getSalarioSqliteDAO().getTodosSalarios();
-		if (this.salarios != null) {
+		if (!this.salarios.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -113,7 +113,7 @@ public class CalculadoraBonusPresenter {
 		DAOSingleton.configurarSingleton(new DAOSQLiteFactory());
 		
 		this.salarios = DAOSingleton.getInstance().getSalarioSqliteDAO().getTodosSalariosMes(data);
-		if (this.salarios != null) {
+		if (!this.salarios.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -128,6 +128,7 @@ public class CalculadoraBonusPresenter {
 		this.funcs = new ArrayList<>();
 		this.valorBonus = new ArrayList<>();
 		for (Salario salario : this.salarios) {
+			System.out.println(salario.getIdFunc());
 			this.funcs.add(this.carregarFuncionariosPorId(salario.getIdFunc()));
 			this.valorBonus.add(carregarBonusPorDataIdFunc(salario.getData(), salario.getIdFunc()));
 		}
