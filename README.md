@@ -50,7 +50,7 @@ REQUISITOS:
 - Java 11 ou superior.
 
 OBS: 
-- Caso queira, pode carregar o arquivo de salários disponibilizado pelo meu professor para popular o banco. O arquivo está na pasta principal do projeto e está limitado à apenas 1000 registros.
+- Caso queira, pode carregar o arquivo de salários disponibilizado pelo professor da matéria para popular o banco. O arquivo está na pasta principal do projeto e está limitado à apenas 1000 registros.
 - Ao insirir a data de contrato de um novo funcionário em "registrar novos funcionários" o formato aceito é somente: dd/mm/aaaa (não utilizar outro).
 
 <br> 
