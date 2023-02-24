@@ -14,7 +14,7 @@ public class CalculoQtdSalarios extends CalculoEstatisticoAbstract {
 	@Override
 	public void calcular() {
 		int qtd = salarios.size();
-		CalculoEstatistico calculo = new CalculoEstatistico("Quantidade de salários", Double.valueOf(qtd));
+		CalculoEstatistico calculo = new CalculoEstatistico("Quantidade de salários", String.valueOf(qtd));
 		registrar(calculo);
 	}
 }

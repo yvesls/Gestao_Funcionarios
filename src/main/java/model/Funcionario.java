@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import DAO.conexao.DAOSingleton;
+
 public class Funcionario {
 	private String nome;
 	private String cargo;

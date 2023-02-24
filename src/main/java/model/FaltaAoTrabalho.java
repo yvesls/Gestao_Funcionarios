@@ -20,7 +20,6 @@ public class FaltaAoTrabalho {
 		this.IdFunc = idFunc;
 		this.quantidade = quantidade;
 		LocalDate data = LocalDate.now();
-		ConversorData.instanciar();
 		this.data = ConversorData.converter(data);
 	}
 	

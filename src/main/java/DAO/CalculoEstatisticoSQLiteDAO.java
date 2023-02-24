@@ -23,7 +23,7 @@ public class CalculoEstatisticoSQLiteDAO extends DAOSQLiteConexao {
 
 			stmt = criarStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, calculo.getTipo());
-			stmt.setDouble(2, calculo.getValor());
+			stmt.setString(2, calculo.getValor());
 			stmt.setString(3, calculo.getData());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
@@ -49,7 +49,7 @@ public class CalculoEstatisticoSQLiteDAO extends DAOSQLiteConexao {
 				+ "  id               INTEGER      PRIMARY KEY AUTOINCREMENT UNIQUE,"
 				+ "  tipo VARCHAR (20) NOT NULL," 
 				+ "	 mes_ano            VARCHAR (20) NOT NULL,"
-				+ "	 valor DOUBLE (10)  NOT NULL "
+				+ "	 valor REAL (10)  NOT NULL "
 				+ ");";
 		PreparedStatement stmt = criarStatement(sql);
 		try {
@@ -107,7 +107,7 @@ public class CalculoEstatisticoSQLiteDAO extends DAOSQLiteConexao {
 				+ calculo.getData() + "' AND tipo = '" + calculo.getTipo() + "';";
 		PreparedStatement stmt = criarStatement(sql);
 		try {
-			stmt.setDouble(1, calculo.getValor());
+			stmt.setString(1, calculo.getValor());
 			stmt.executeUpdate();
 			fechar();
 		} catch (SQLException e) {
@@ -133,13 +133,13 @@ public class CalculoEstatisticoSQLiteDAO extends DAOSQLiteConexao {
 		CalculoEstatistico calc = new CalculoEstatistico();
 		ResultSet result = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT DISTINCT mes_ano, id, tipo, valor FROM tb_calculo_estatistico;";
+		String sql = "SELECT DISTINCT mes_ano, id, tipo, ROUND(valor, 2) valor FROM tb_calculo_estatistico;";
 
 		stmt = this.criarStatement(sql);
 		try {
 			result = stmt.executeQuery();
 			while (result.next()) {
-				calc = new CalculoEstatistico(result.getInt("id"), result.getString("tipo"), result.getDouble("valor"), result.getString("mes_ano"));
+				calc = new CalculoEstatistico(result.getInt("id"), result.getString("tipo"), result.getString("valor"), result.getString("mes_ano"));
 				listaCalc.add(calc);
 			}
 			fechar();

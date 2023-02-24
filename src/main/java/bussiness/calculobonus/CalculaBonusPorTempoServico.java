@@ -18,7 +18,6 @@ public class CalculaBonusPorTempoServico extends CalculaBonusAbstract {
 		LocalDate date = LocalDate.now(); 
 		String data = ConversorData.converter(date);
 		Double valorBonus = 0.0;
-		System.out.println("tempo");
 		if(func.getTempoServico() != 0) {
 			if(func.getTempoServico() > 0 && func.getTempoServico() <= 5) {
 				valorBonus = 0.02;

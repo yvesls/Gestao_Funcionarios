@@ -19,7 +19,7 @@ public class CalculoMaiorSalario extends CalculoEstatisticoAbstract {
 		for(Salario sal : salarios) {
 			valorSals.add(sal.getSalarioTotal());
 		}
-		CalculoEstatistico calculo = new CalculoEstatistico("Maior salário", Collections.max(valorSals));
+		CalculoEstatistico calculo = new CalculoEstatistico("Maior salário", String.valueOf(Collections.max(valorSals)));
 		registrar(calculo);
 	}
 }

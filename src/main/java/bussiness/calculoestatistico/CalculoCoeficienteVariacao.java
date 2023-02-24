@@ -24,7 +24,7 @@ public class CalculoCoeficienteVariacao extends CalculoEstatisticoAbstract {
         }
         Double desvioPadrao = Math.sqrt(somaQuadrados / salarios.size());
         Double coeficienteVariacao = (desvioPadrao / media) * 100;
-		CalculoEstatistico calculo = new CalculoEstatistico("Coeficiente de variação", coeficienteVariacao);
+		CalculoEstatistico calculo = new CalculoEstatistico("Coeficiente de variação", String.valueOf(coeficienteVariacao));
 		registrar(calculo);
 	}
 }

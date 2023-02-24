@@ -5,7 +5,7 @@ import model.Funcionario;
 
 public interface IFuncionarioSQLiteDAO {
 	
-	public boolean salvar(Funcionario funcionario);
+	public int salvar(Funcionario funcionario);
 
 	public List<Funcionario> getListFuncDAO();
 

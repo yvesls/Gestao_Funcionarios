@@ -55,7 +55,7 @@ public class SalarioSQLiteDAO extends DAOSQLiteConexao {
 		conectar();
 		ResultSet result = null;
 		PreparedStatement stmt = null;
-		String sql = "" + "SELECT id_funcionario, salario, salario_total, data_salario FROM tb_salario";
+		String sql = "" + "SELECT id_funcionario, salario, ROUND(salario_total, 2) salario_total, data_salario FROM tb_salario";
 
 		stmt = criarStatement(sql);
 		try {
@@ -142,7 +142,7 @@ public class SalarioSQLiteDAO extends DAOSQLiteConexao {
 		PreparedStatement stmt = null;
 		Salario sal = new Salario();
 
-		String sql = "SELECT id_funcionario, salario, salario_total, data_salario "
+		String sql = "SELECT id_funcionario, salario, ROUND(salario_total, 2) salario_total, data_salario "
 				+ "FROM tb_salario;";
 		stmt = this.criarStatement(sql);
 
@@ -180,7 +180,7 @@ public class SalarioSQLiteDAO extends DAOSQLiteConexao {
 		PreparedStatement stmt = null;
 		Salario sal = new Salario();
 
-		String sql = "SELECT id_funcionario, salario, salario_total, data_salario "
+		String sql = "SELECT id_funcionario, salario, ROUND(salario_total, 2) salario_total, data_salario "
 				+ "FROM tb_salario WHERE data_salario LIKE '%" + data + "';";
 		stmt = this.criarStatement(sql);
 
@@ -231,9 +231,7 @@ public class SalarioSQLiteDAO extends DAOSQLiteConexao {
 				+ "' AND data_salario = '" + data + "'";
 		PreparedStatement stmt = criarStatement(sql);
 		try {
-
 			stmt.setDouble(1, sal.getSalarioTotal());
-
 			stmt.executeUpdate();
 			fechar();
 		} catch (SQLException e) {

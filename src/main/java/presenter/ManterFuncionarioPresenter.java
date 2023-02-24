@@ -211,6 +211,7 @@ public class ManterFuncionarioPresenter {
 		if (falta != null) {
 			qtdFalta = falta.getQuantidadeFaltas();
 		} else {
+			falta = new FaltaAoTrabalho(func.getFuncId(), 0);
 			func.addFalta(falta);
 			DAOSingleton.getInstance().getFaltaSqliteDAO().salvar(func.getFaltaTrabalho());
 			falta = DAOSingleton.getInstance().getFaltaSqliteDAO().getFaltasFuncionarioEsseMes(func.getFuncId(), data);

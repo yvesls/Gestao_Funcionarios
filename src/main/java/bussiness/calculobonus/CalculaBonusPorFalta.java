@@ -23,7 +23,10 @@ public class CalculaBonusPorFalta extends CalculaBonusAbstract {
 		LocalDate date = LocalDate.now();
 		String data = ConversorData.converter(date);
 		falta = DAOSingleton.getInstance().getFaltaSqliteDAO().getFaltasFuncionarioEsseMes(func.getFuncId(), date);
-		System.out.println("falta");
+		if (falta == null) {
+			falta = new FaltaAoTrabalho(func.getFuncId(), 0);
+			DAOSingleton.getInstance().getFaltaSqliteDAO().salvar(falta);
+		}
 		if(falta.getQuantidadeFaltas() < 6) {
 			if(falta.getQuantidadeFaltas() == 0) {
 				valorBonus = 0.05;

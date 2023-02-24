@@ -16,9 +16,10 @@ import model.Funcionario;
 
 public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionarioSQLiteDAO {
 
-	public boolean salvar(Funcionario funcionario) {
+	public int salvar(Funcionario funcionario) {
 		PreparedStatement stmt = null;
-
+		ResultSet result = null;
+		int idGerado = -1;
 		try {
 			conectar();
 
@@ -38,10 +39,12 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionar
 			stmt.setDouble(9, funcionario.getTempoServico());
 
 			stmt.executeUpdate();
-
+			result = stmt.getGeneratedKeys();
+			if (result.next()) {
+				idGerado = result.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
 		} finally {
 			if (stmt != null) {
 				try {
@@ -54,7 +57,7 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionar
 		}
 
 		fechar();
-		return true;
+		return idGerado;
 	}
 
 	public List<Funcionario> getListFuncDAO() {
@@ -65,14 +68,14 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionar
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		String sql = "" + "SELECT id, " + "nome_funcionario, " + "dist_trabalho, " + "idade, " + "cargo, " + "admissao,"
-				+ "salario, funcionario_mes, tempo_servico, salario_total " + "FROM tb_funcionario";
+				+ "salario, funcionario_mes, tempo_servico, ROUND(salario_total, 2) salario_total " + "FROM tb_funcionario";
 
 		stmt = criarStatement(sql);
 		try {
 			result = stmt.executeQuery();
 			while (result.next()) {
-				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"),
-						result.getString("cargo"), result.getInt("idade"), result.getDouble("salario_total"),
+				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario").replaceAll("\"", ""),
+						result.getString("cargo").replaceAll("\"", ""), result.getInt("idade"), result.getDouble("salario_total"),
 						result.getDouble("salario"), result.getDouble("dist_trabalho"), result.getString("admissao"),
 						result.getBoolean("funcionario_mes"), result.getDouble("tempo_servico"));
 				listaFunc.add(func);
@@ -130,15 +133,15 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionar
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		String sql = "" + "SELECT id, " + "nome_funcionario, " + "dist_trabalho, " + "cargo, " + "admissao,"
-				+ "salario, tempo_servico, salario_total, funcionario_mes "
+				+ "salario, tempo_servico, ROUND(salario_total, 2) salario_total, funcionario_mes "
 				+ "FROM tb_funcionario WHERE data_salario LIKE '%" + data + "';";
 
 		stmt = criarStatement(sql);
 		try {
 			result = stmt.executeQuery();
 			while (result.next()) {
-				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"),
-						result.getString("cargo"), result.getInt("idade"), result.getDouble("salario_total"),
+				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario").replaceAll("\"", ""),
+						result.getString("cargo").replaceAll("\"", ""), result.getInt("idade"), result.getDouble("salario_total"),
 						result.getDouble("salario"), result.getDouble("dist_trabalho"), result.getString("admissao"),
 						result.getBoolean("funcionario_mes"), result.getDouble("tempo_servico"));
 				listaFunc.add(func);
@@ -222,7 +225,7 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionar
 		Funcionario func = new Funcionario();
 
 		String sql = "SELECT id, nome_funcionario, dist_trabalho, idade, cargo, admissao,"
-				+ "salario, salario_total, tempo_servico, funcionario_mes FROM tb_funcionario WHERE nome_funcionario LIKE '%"
+				+ "salario, ROUND(salario_total, 2) salario_total, tempo_servico, funcionario_mes FROM tb_funcionario WHERE nome_funcionario LIKE '%"
 				+ nome + "%';";
 		stmt = this.criarStatement(sql);
 
@@ -230,8 +233,8 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionar
 			stmt.executeQuery();
 			result = stmt.executeQuery();
 			while (result.next()) {
-				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"),
-						result.getString("cargo"), result.getInt("idade"), result.getDouble("salario_total"),
+				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario").replaceAll("\"", ""),
+						result.getString("cargo").replaceAll("\"", ""), result.getInt("idade"), result.getDouble("salario_total"),
 						result.getDouble("salario"), result.getDouble("dist_trabalho"), result.getString("admissao"),
 						result.getBoolean("funcionario_mes"), result.getDouble("tempo_servico"));
 
@@ -261,7 +264,7 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionar
 		PreparedStatement stmt = null;
 		Funcionario func = new Funcionario();
 
-		String sql = "SELECT id, nome_funcionario, idade, cargo, dist_trabalho, admissao, salario, salario_total, funcionario_mes, tempo_servico FROM tb_funcionario WHERE id = '"
+		String sql = "SELECT id, nome_funcionario, idade, cargo, dist_trabalho, admissao, salario, ROUND(salario_total, 2) salario_total, funcionario_mes, tempo_servico FROM tb_funcionario WHERE id = '"
 				+ idFunc + "';";
 		stmt = this.criarStatement(sql);
 
@@ -270,8 +273,8 @@ public class FuncionarioSQLiteDAO extends DAOSQLiteConexao implements IFuncionar
 			result = stmt.executeQuery();
 			System.out.println(result.toString());
 			if (result != null) {
-				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario"),
-						result.getString("cargo"), result.getInt("idade"), result.getDouble("salario_total"),
+				func = new Funcionario(result.getInt("id"), result.getString("nome_funcionario").replaceAll("\"", ""),
+						result.getString("cargo").replaceAll("\"", ""), result.getInt("idade"), result.getDouble("salario_total"),
 						result.getDouble("salario"), result.getDouble("dist_trabalho"), result.getString("admissao"),
 						result.getBoolean("funcionario_mes"), result.getDouble("tempo_servico"));
 			}

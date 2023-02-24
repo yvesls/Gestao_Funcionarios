@@ -74,7 +74,7 @@ public class CalculadoraBonusPresenter {
 			public void actionPerformed(ActionEvent e) {
 				if (!view.getTextDataDosFuncionarios().getText().equals("")) {
 					dataDaProcura = view.getTextDataDosFuncionarios().getText();
-					view.getLblMostraDataCalculo().setText(dataDaProcura);
+					view.getLblDataCalculo().setText(dataDaProcura);
 					if (!carregarSalariosData(view.getTextDataDosFuncionarios().getText())) {
 
 						JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum registro nessa data inserida.",
@@ -93,6 +93,9 @@ public class CalculadoraBonusPresenter {
 
 		view.getBtnListarTodos().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				LocalDate data = LocalDate.now();
+				String date = ConversorData.converter(data);
+				view.getLblDataCalculo().setText(date);
 				if (!carregarTodosSalarios()) {
 					JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum registro.",
 							"Erro", JOptionPane.ERROR_MESSAGE);

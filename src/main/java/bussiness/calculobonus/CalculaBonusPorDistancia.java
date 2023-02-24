@@ -18,13 +18,12 @@ public class CalculaBonusPorDistancia extends CalculaBonusAbstract {
 		Double valorBonus = 0.0;
 		LocalDate date = LocalDate.now();
 		String data = ConversorData.converter(date);
-		System.out.println("distancia");
 		if (func.getDistTrab() >= 50.0) {
 			if (func.getDistTrab() <= 100) {
 				valorBonus = 0.02;
 			} else if (func.getDistTrab() > 100 && func.getDistTrab() < 150) {
 				valorBonus = 0.035;
-			} else if (func.getDistTrab() >= 150 && func.getDistTrab() < 200) {
+			} else if (func.getDistTrab() >= 150 && func.getDistTrab() < 250) {
 				valorBonus = 0.05;
 			} else if (func.getDistTrab() >= 250) {
 				valorBonus = 0.07;

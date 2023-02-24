@@ -54,7 +54,7 @@ public class BonusSQLiteDAO extends DAOSQLiteConexao {
 		ResultSet result = null;
 		PreparedStatement stmt = null;
 		String sql = ""
-				+ "SELECT id_funcionario, tipo_bonus, data_bonus, valor_bonus FROM tb_bonus WHERE data_bonus LIKE '%"
+				+ "SELECT id_funcionario, tipo_bonus, data_bonus, ROUND(valor_bonus, 2) valor_bonus FROM tb_bonus WHERE data_bonus LIKE '%"
 				+ mes + "';";
 
 		stmt = criarStatement(sql);
@@ -89,7 +89,7 @@ public class BonusSQLiteDAO extends DAOSQLiteConexao {
 		Bonus bonus = new Bonus();
 		ResultSet result = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT id_funcionario, valor_bonus, tipo_bonus, data_bonus FROM tb_bonus WHERE id_funcionario = '" + idFunc + "';";
+		String sql = "SELECT id_funcionario, ROUND(valor_bonus, 2) valor_bonus, tipo_bonus, data_bonus FROM tb_bonus WHERE id_funcionario = '" + idFunc + "';";
 
 		stmt = this.criarStatement(sql);
 		try {
@@ -100,7 +100,6 @@ public class BonusSQLiteDAO extends DAOSQLiteConexao {
 			}
 			fechar();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (stmt != null) {
@@ -121,7 +120,7 @@ public class BonusSQLiteDAO extends DAOSQLiteConexao {
 		Bonus bonus = new Bonus();
 		ResultSet result = null;
 		PreparedStatement stmt = null;
-		String sql = "SELECT id_funcionario, valor_bonus, tipo_bonus, data_bonus FROM tb_bonus WHERE data_bonus = '" + data
+		String sql = "SELECT id_funcionario, ROUND(valor_bonus, 2) valor_bonus, tipo_bonus, data_bonus FROM tb_bonus WHERE data_bonus = '" + data
 				+ "' AND id_funcionario ='" + idFunc + "';";
 
 		stmt = this.criarStatement(sql);

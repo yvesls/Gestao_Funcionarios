@@ -16,8 +16,6 @@ public class FuncionarioEditacaoState extends FuncionarioStates {
 		funcManterPresenter.getViewManterFuncionario().getTextDistTrab().setVisible(true);
 		funcManterPresenter.getViewManterFuncionario().getTextFaltas().setVisible(true);
 		funcManterPresenter.getViewManterFuncionario().getChckbxFuncMes().setVisible(true);
-		funcManterPresenter.getViewManterFuncionario().getTextTempoServico().setVisible(true);
-		funcManterPresenter.getViewManterFuncionario().getLblTempoServico().setVisible(true);
 		
 		funcManterPresenter.getViewManterFuncionario().getTextNome().setText(funcManterPresenter.getFunc().getNome());
 		funcManterPresenter.getViewManterFuncionario().getTextCargo().setText(funcManterPresenter.getFunc().getCargo());

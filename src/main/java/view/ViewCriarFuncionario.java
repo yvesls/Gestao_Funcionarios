@@ -21,6 +21,7 @@ public class ViewCriarFuncionario {
 	private JButton btnFecharCriarFuncionario;
 	private JButton btnSalvarCriarFuncionario;
 	private JTextField TextDistTrab;
+	private JButton btnCarregarArquivo;
 	
 	public ViewCriarFuncionario() {
 		this.frame = new JFrame();
@@ -107,6 +108,11 @@ public class ViewCriarFuncionario {
 		TextDistTrab.setBounds(472, 28, 66, 24);
 		frame.getContentPane().add(TextDistTrab);
 		TextDistTrab.setColumns(10);
+		
+		btnCarregarArquivo = new JButton("Carregar Arquivo");
+		btnCarregarArquivo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCarregarArquivo.setBounds(261, 211, 172, 23);
+		frame.getContentPane().add(btnCarregarArquivo);
 	}
 	
 	public JFrame getFrame() {
@@ -143,5 +149,9 @@ public class ViewCriarFuncionario {
 
 	public JTextField getTextDistTrab() {
 		return TextDistTrab;
+	}
+
+	public JButton getBtnCarregarArquivo() {
+		return btnCarregarArquivo;
 	}
 }

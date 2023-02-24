@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import bussiness.calculobonus.ConversorData;
 
 public class CalculoEstatistico {
-	private Double valor;
+	private String valor;
 	private String data;
 	private String tipo;
 	private int id;
@@ -13,14 +13,14 @@ public class CalculoEstatistico {
 	public CalculoEstatistico() {
 	}
 	
-	public CalculoEstatistico(int id, String tipo, Double valor, String data) {
+	public CalculoEstatistico(int id, String tipo, String valor, String data) {
 		this.id = id;
 		this.tipo = tipo;
 		this.valor = valor;
 		this.data = data;
 	}
 	
-	public CalculoEstatistico(String tipo, Double valor) {
+	public CalculoEstatistico(String tipo, String valor) {
 		this.tipo = tipo;
 		this.valor = valor;
 		LocalDate date = LocalDate.now();
@@ -28,7 +28,7 @@ public class CalculoEstatistico {
 		this.data = ConversorData.converter(date);
 	}
 
-	public Double getValor() {
+	public String getValor() {
 		return valor;
 	}
 

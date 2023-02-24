@@ -16,7 +16,6 @@ public class CalculaBonusFuncionarioMes extends CalculaBonusAbstract {
 	public void calcular() {
 		LocalDate date = LocalDate.now();
 		String data = ConversorData.converter(date);
-		System.out.println("mes");
 		if(func.getIsFuncionarioDoMes()) {
 			this.bonus = new Bonus(func.getFuncId(), "Funcionario do mês", data, 200.0);
 			this.salario = new Salario(func.getFuncId(), func.getSalario(),  Double.valueOf(func.getSalarioTotal()) + 200, data);

@@ -18,7 +18,7 @@ public class CalculoMedia extends CalculoEstatisticoAbstract {
             media += salario.getSalarioTotal();
         }
         media /= salarios.size();
-		CalculoEstatistico calculo = new CalculoEstatistico("Média", media);
+		CalculoEstatistico calculo = new CalculoEstatistico("Média", String.valueOf(media));
 		registrar(calculo);
 	}
 }

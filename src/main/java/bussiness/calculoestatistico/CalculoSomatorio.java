@@ -17,7 +17,7 @@ public class CalculoSomatorio extends CalculoEstatisticoAbstract {
 		for(Salario sal : salarios) {
 			soma += sal.getSalarioTotal();
 		}
-		CalculoEstatistico calculo = new CalculoEstatistico("Somatório", soma);
+		CalculoEstatistico calculo = new CalculoEstatistico("Somatório", String.valueOf(soma));
 		registrar(calculo);
 	}
 }

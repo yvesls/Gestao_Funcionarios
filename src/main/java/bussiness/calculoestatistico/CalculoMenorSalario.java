@@ -19,7 +19,7 @@ public class CalculoMenorSalario extends CalculoEstatisticoAbstract {
 		for(Salario sal : salarios) {
 			valorSals.add(sal.getSalarioTotal());
 		}
-		CalculoEstatistico calculo = new CalculoEstatistico("Menor salário", Collections.min(valorSals));
+		CalculoEstatistico calculo = new CalculoEstatistico("Menor salário", String.valueOf(Collections.min(valorSals)));
 		registrar(calculo);
 	}
 }

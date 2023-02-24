@@ -23,7 +23,7 @@ public class CalculoDesvioPadrao extends CalculoEstatisticoAbstract {
             somaQuadrados += Math.pow(salario.getSalarioTotal() - media, 2);
         }
 		Double desvioPadrao = Math.sqrt(somaQuadrados / salarios.size());
-		CalculoEstatistico calculo = new CalculoEstatistico("Desvio padrão", desvioPadrao);
+		CalculoEstatistico calculo = new CalculoEstatistico("Desvio padrão", String.valueOf(desvioPadrao));
 		registrar(calculo);
 	}
 }
